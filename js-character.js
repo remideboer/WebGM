@@ -778,7 +778,41 @@ let fof = [
   "truly loathes",
 ];
 
+/**
+ * Kiest een index uit een array met een bell curve distributie
+ * @param {number} mean - Het gemiddelde (center) van de curve (0 tot arrayLength-1)
+ * @param {number} stdDev - Standaard deviatie (hoe breed de curve is)
+ * @param {number} arrayLength - Lengte van de array
+ * @returns {number} Index tussen 0 en arrayLength-1
+ */
+function bellCurvePick(mean, stdDev, arrayLength) {
+  // Genereer een normale distributie met Box-Muller transformatie
+  let u1 = Math.random();
+  let u2 = Math.random();
+  let z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  
+  // Pas mean en stdDev toe
+  let value = mean + z0 * stdDev;
+  
+  // Clamp naar geldig bereik
+  value = Math.round(value);
+  if (value < 0) value = 0;
+  if (value >= arrayLength) value = arrayLength - 1;
+  
+  return value;
+}
+
 function friend() {
-  let friendly = randomPick(fof);
+  // Haal slider waarde op (-4 tot +4)
+  let sliderValue = parseInt(document.getElementById("friendlinessSlider").value) || 0;
+  
+  // Bereken mean: index 4 is neutraal, verschuif op basis van slider
+  // slider -4 = mean 0 (zeer hostile), slider 0 = mean 4 (neutraal), slider +4 = mean 8 (zeer friendly)
+  let mean = 4 + sliderValue;
+  
+  // Gebruik bell curve distributie met stdDev 1.5 voor een mooie curve
+  let index = bellCurvePick(mean, 1.5, fof.length);
+  
+  let friendly = fof[index];
   print(friendly + " the person");
 }
