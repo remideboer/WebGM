@@ -28,7 +28,7 @@
 	--controls-width: 95%;
 	--controls-max-width: 1200px;
 	--subgroups-per-row: 2; /* Aantal subgroepen per regel */
-	--subgroup-gap: 20px; /* Ruimte tussen subgroepen */
+	--subgroup-gap: 15px; /* Ruimte tussen subgroepen (zowel horizontaal als verticaal) */
 	--subgroup-padding-horizontal: 10px; /* Horizontale padding in subgroepen */
 	--subgroup-padding-vertical: 12px; /* Verticale padding in subgroepen */
 	--group-margin: 15px; /* Margin tussen groepen */
@@ -63,7 +63,8 @@
 	width: var(--controls-width);
 	max-width: var(--controls-max-width);
 	margin: 0 auto;
-	padding: 0 10px;
+	padding: var(--subgroup-gap);
+	box-sizing: border-box;
 }
 
 .control-subgroup {
@@ -75,6 +76,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	box-sizing: border-box;
 }
 
 .subgroup-header {
@@ -92,7 +94,7 @@
 	align-items: center;
 	gap: 8px;
 	flex: 1;
-	justify-content: flex-start;
+	justify-content: center;
 }
 
 .button-row {
