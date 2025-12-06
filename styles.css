@@ -1,0 +1,130 @@
+/* Color Scheme - Modulair aanpasbaar */
+:root {
+	--card-bg-new: #d4edda; /* Light green */
+	--card-border-new: #007bff; /* Blue */
+	--card-text-new: #721c24; /* Dark red */
+	--card-bg-old: #d4edda; /* Light green */
+	--card-border-old: #8b4513; /* Brown */
+	--card-text-old: #dc3545; /* Light red, faded */
+	--card-opacity-old: 0.6; /* Fade effect */
+	
+	/* Message notification colors */
+	--message-bg-success: #d4edda; /* Light green */
+	--message-border-success: #28a745; /* Green */
+	--message-text-success: #155724; /* Dark green */
+	--message-bg-info: #d1ecf1; /* Light blue */
+	--message-border-info: #17a2b8; /* Blue */
+	--message-text-info: #0c5460; /* Dark blue */
+	--message-bg-warning: #fff3cd; /* Light yellow */
+	--message-border-warning: #ffc107; /* Yellow */
+	--message-text-warning: #856404; /* Dark yellow */
+	--message-bg-error: #f8d7da; /* Light red */
+	--message-border-error: #dc3545; /* Red */
+	--message-text-error: #721c24; /* Dark red */
+}
+
+img#canvasA, img#canvasB, img#canvasC {
+	width: 100px;
+	height: 100px;
+	background-color: transparent;
+	border: 0 !important;
+	border-top: 0 !important;
+	border-right: 0 !important;
+	border-bottom: 0 !important;
+	border-left: 0 !important;
+	border-color: transparent !important;
+	border-width: 0 !important;
+	border-style: none !important;
+	outline: none !important;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#display {
+	width: 100%;
+	height: 300px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	overflow-y: auto;
+	background-color: #fff;
+	font-family: Arial, sans-serif;
+}
+
+.display-card {
+	margin-bottom: 10px;
+	padding: 12px;
+	border-radius: 8px;
+	word-wrap: break-word;
+	transition: opacity 0.3s ease;
+}
+
+.display-card.new {
+	background-color: var(--card-bg-new);
+	border: 2px solid var(--card-border-new);
+	color: var(--card-text-new);
+}
+
+.display-card.old {
+	background-color: var(--card-bg-old);
+	border: 1px solid var(--card-border-old);
+	color: var(--card-text-old);
+	opacity: var(--card-opacity-old);
+}
+
+/* Message notification */
+.message-notification {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 12px 24px;
+	border-radius: 8px;
+	border: 2px solid;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+	z-index: 1000;
+	min-width: 200px;
+	text-align: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.message-notification.show {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(-50%) translateY(0);
+}
+
+.message-notification.fade-out {
+	opacity: 0;
+	transform: translateX(-50%) translateY(20px);
+}
+
+.message-notification.success {
+	background-color: var(--message-bg-success);
+	border-color: var(--message-border-success);
+	color: var(--message-text-success);
+}
+
+.message-notification.info {
+	background-color: var(--message-bg-info);
+	border-color: var(--message-border-info);
+	color: var(--message-text-info);
+}
+
+.message-notification.warning {
+	background-color: var(--message-bg-warning);
+	border-color: var(--message-border-warning);
+	color: var(--message-text-warning);
+}
+
+.message-notification.error {
+	background-color: var(--message-bg-error);
+	border-color: var(--message-border-error);
+	color: var(--message-text-error);
+}
+
