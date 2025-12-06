@@ -1,26 +1,35 @@
 /* Color Scheme - Modulair aanpasbaar */
 :root {
-	--card-bg-new: #d4edda; /* Light green */
-	--card-border-new: #007bff; /* Blue */
-	--card-text-new: #721c24; /* Dark red */
-	--card-bg-old: #d4edda; /* Light green */
-	--card-border-old: #8b4513; /* Brown */
-	--card-text-old: #dc3545; /* Light red, faded */
-	--card-opacity-old: #0.6; /* Fade effect */
+	/* Basis kleuren */
+	--bg-primary: #F5F7F6; /* Subtiel grijs-groen background */
+	--card-bg: #FFFFFF; /* Witte cards/panels */
+	--text-primary: #1F3A3D; /* Donker teal-grijs voor tekst */
+	--border-primary: #D4DCD9; /* Subtiel grijs-groen voor borders */
+	--accent-primary: #2A7A7F; /* Gedempte teal - primaire accent */
+	--accent-secondary: #C17F4A; /* Warm brons voor highlights */
 	
-	/* Message notification colors */
-	--message-bg-success: #d4edda; /* Light green */
-	--message-border-success: #28a745; /* Green */
-	--message-text-success: #155724; /* Dark green */
-	--message-bg-info: #d1ecf1; /* Light blue */
-	--message-border-info: #17a2b8; /* Blue */
-	--message-text-info: #0c5460; /* Dark blue */
-	--message-bg-warning: #fff3cd; /* Light yellow */
-	--message-border-warning: #ffc107; /* Yellow */
-	--message-text-warning: #856404; /* Dark yellow */
-	--message-bg-error: #f8d7da; /* Light red */
-	--message-border-error: #dc3545; /* Red */
-	--message-text-error: #721c24; /* Dark red */
+	/* Display card kleuren */
+	--card-bg-new: #FFFFFF; /* Witte cards */
+	--card-border-new: #2A7A7F; /* Primaire accent */
+	--card-text-new: #1F3A3D; /* Donker teal-grijs */
+	--card-bg-old: #FFFFFF; /* Witte cards */
+	--card-border-old: #D4DCD9; /* Subtiel grijs-groen */
+	--card-text-old: #1F3A3D; /* Donker teal-grijs, faded */
+	--card-opacity-old: 0.6; /* Fade effect */
+	
+	/* Message notification colors - aangepast naar nieuw schema */
+	--message-bg-success: #FFFFFF; /* Witte background */
+	--message-border-success: #2A7A7F; /* Primaire accent */
+	--message-text-success: #1F3A3D; /* Donker teal-grijs */
+	--message-bg-info: #FFFFFF; /* Witte background */
+	--message-border-info: #2A7A7F; /* Primaire accent */
+	--message-text-info: #1F3A3D; /* Donker teal-grijs */
+	--message-bg-warning: #FFFFFF; /* Witte background */
+	--message-border-warning: #C17F4A; /* Secundaire accent */
+	--message-text-warning: #1F3A3D; /* Donker teal-grijs */
+	--message-bg-error: #FFFFFF; /* Witte background */
+	--message-border-error: #C17F4A; /* Secundaire accent */
+	--message-text-error: #1F3A3D; /* Donker teal-grijs */
 	
 	/* Layout variabelen - Modulair aanpasbaar */
 	--display-width: 95%;
@@ -32,6 +41,12 @@
 	--subgroup-padding-horizontal: 10px; /* Horizontale padding in subgroepen */
 	--subgroup-padding-vertical: 12px; /* Verticale padding in subgroepen */
 	--group-margin: 15px; /* Margin tussen groepen */
+}
+
+/* Body background */
+body {
+	background-color: var(--bg-primary);
+	color: var(--text-primary);
 }
 
 /* Group centering */
@@ -64,9 +79,10 @@
 .control-subgroup {
 	width: 100%;
 	padding: var(--subgroup-padding-vertical) var(--subgroup-padding-horizontal);
-	border: 1px solid #ddd;
+	border: 1px solid var(--border-primary);
 	border-radius: 8px;
-	background-color: #f9f9f9;
+	background-color: var(--card-bg);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -78,7 +94,7 @@
 	padding: 0;
 	font-size: 15px;
 	font-weight: bold;
-	color: #333;
+	color: var(--text-primary);
 	text-align: center;
 }
 
@@ -118,6 +134,52 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	color: var(--text-primary);
+}
+
+/* Button styling */
+button {
+	background-color: var(--card-bg);
+	border: 1px solid var(--border-primary);
+	color: var(--text-primary);
+	padding: 8px 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+button:hover {
+	background-color: var(--accent-primary);
+	border-color: var(--accent-primary);
+	color: #FFFFFF;
+}
+
+button:active {
+	background-color: var(--accent-secondary);
+	border-color: var(--accent-secondary);
+}
+
+/* Input styling */
+input[type="text"],
+input[type="range"] {
+	color: var(--text-primary);
+	border: 1px solid var(--border-primary);
+	background-color: var(--card-bg);
+}
+
+input[type="text"] {
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+input[type="text"]:focus {
+	outline: none;
+	border-color: var(--accent-primary);
+}
+
+span {
+	color: var(--text-primary);
 }
 
 
@@ -125,10 +187,11 @@
 	width: var(--display-width);
 	max-width: var(--display-max-width);
 	height: 300px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--border-primary);
 	padding: 10px;
 	overflow-y: auto;
-	background-color: #fff;
+	background-color: var(--card-bg);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 	font-family: Arial, sans-serif;
 	display: flex;
 	flex-direction: column-reverse;
@@ -243,11 +306,11 @@
 
 .footer-line {
 	font-size: 12px;
-	color: #666;
+	color: var(--text-primary);
 }
 
 .footer-line a {
-	color: #007bff;
+	color: var(--accent-primary);
 	text-decoration: none;
 }
 
