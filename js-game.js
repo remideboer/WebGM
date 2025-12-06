@@ -651,29 +651,43 @@ function displayImage() {
 // Roll custom dice
 
 function customDice() {
-  let diceSides = document.getElementById("diceSides").value;
-  let numDice = document.getElementById("numDice").value;
-  let results = [];
+  let diceSidesInput = document.getElementById("diceSides");
+  let numDiceInput = document.getElementById("numDice");
+  
+  if (!diceSidesInput || !numDiceInput) {
+    print("Error: Dice input fields not found");
+    return;
+  }
+  
+  let diceSides = parseInt(diceSidesInput.value) || 20;
+  let numDice = parseInt(numDiceInput.value) || 1;
+  let results = "";
   let diceTotal = 0;
-  switch (true) {
-    case numDice <= 0:
-      print("Error - you can't roll " + numDice + " dice.");
-      break;
-    case diceSides < 2:
-      print("Error - dice can't have " + diceSides + " sides.");
-      break;
-    case numDice == 1:
-      results = Math.floor(Math.random() * diceSides) + 1;
-      print(results);
-      break;
-    default:
-      for (i = 0; i < numDice; i++) {
-        let randomNumber = Math.floor(Math.random() * diceSides) + 1;
-        diceTotal += randomNumber;
-        results += randomNumber + ", ";
-      }
-      print(results + "total: " + diceTotal);
-      break;
+  
+  // Validate inputs
+  if (numDice <= 0) {
+    print("Error - you can't roll " + numDice + " dice.");
+    return;
+  }
+  
+  if (diceSides < 2) {
+    print("Error - dice can't have " + diceSides + " sides.");
+    return;
+  }
+  
+  // Roll dice
+  if (numDice === 1) {
+    let singleResult = Math.floor(Math.random() * diceSides) + 1;
+    print(String(singleResult));
+  } else {
+    let rollResults = [];
+    for (let i = 0; i < numDice; i++) {
+      let randomNumber = Math.floor(Math.random() * diceSides) + 1;
+      diceTotal += randomNumber;
+      rollResults.push(randomNumber);
+    }
+    results = rollResults.join(", ");
+    print(results + " total: " + diceTotal);
   }
 }
 
