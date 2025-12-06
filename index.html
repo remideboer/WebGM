@@ -3,6 +3,8 @@
 <head>
 	<title>WebGM</title>
 	<link rel="stylesheet" href="styles.css">
+	<!-- Shared utilities (must be loaded first) -->
+	<script src="js-utility.js"></script>
 	<!-- Data files -->
 	<script src="data/world.js"></script>
 	<script src="data/character.js"></script>
@@ -10,8 +12,11 @@
 	<script src="data/creature.js"></script>
 	<script src="data/magic.js"></script>
 	<script src="data/utility.js"></script>
-	<!-- Main JS files -->
-	<script src="js-utility.js"></script>
+	<!-- Features -->
+	<script src="features/mythic/data.js"></script>
+	<script src="features/mythic/logic.js"></script>
+	<script src="features/mythic/index.js"></script>
+	<!-- Main JS files (legacy - will be migrated) -->
 	<script src="js-game.js"></script>
 	<script src="js-general.js"></script>
 	<script src="js-character.js"></script>
