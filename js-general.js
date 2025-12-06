@@ -1054,8 +1054,11 @@ function colorGet() {
   let G_value = Math.floor(Math.random() * 255);
   let B_value = Math.floor(Math.random() * 255);
   let rand_color = "rgb(" + R_value + ", " + G_value + ", " + B_value + ")";
-  document.getElementById("colorButton").style.backgroundColor = rand_color;
-  print("color: " + rand_color);
+  // Print with color type so display card uses this color as background
+  print("color: " + rand_color, {
+    type: "color",
+    backgroundColor: rand_color
+  });
 }
 
 //Animal

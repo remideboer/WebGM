@@ -23,13 +23,105 @@ function capitalizeSentences(text) {
   return result;
 }
 
-function print(str) {
+// Calculate relative luminance for contrast calculation
+function getLuminance(r, g, b) {
+  // Convert RGB to relative luminance
+  let [rs, gs, bs] = [r, g, b].map(val => {
+    val = val / 255;
+    return val <= 0.03928 ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
+
+// Calculate contrast ratio between two colors
+function getContrastRatio(lum1, lum2) {
+  // L1 is the lighter color, L2 is the darker color
+  let L1 = Math.max(lum1, lum2);
+  let L2 = Math.min(lum1, lum2);
+  return (L1 + 0.05) / (L2 + 0.05);
+}
+
+// Calculate contrast color that meets WCAG AA standards (minimum 4.5:1 ratio)
+function getContrastColor(rgbString) {
+  // Parse RGB string like "rgb(123, 45, 67)"
+  let match = rgbString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+  if (!match) return "#000000"; // Default to black if parsing fails
+  
+  let r = parseInt(match[1]);
+  let g = parseInt(match[2]);
+  let b = parseInt(match[3]);
+  
+  // Calculate background luminance
+  let bgLuminance = getLuminance(r, g, b);
+  
+  // WCAG AA requires minimum 4.5:1 contrast ratio for normal text
+  const minContrastRatio = 4.5;
+  
+  // Determine if we need dark or light text
+  let needsDarkText = bgLuminance > 0.5;
+  
+  // Start with complementary color
+  let textR = 255 - r;
+  let textG = 255 - g;
+  let textB = 255 - b;
+  
+  // Calculate required luminance for text
+  let requiredTextLum;
+  if (needsDarkText) {
+    // For dark text on light background: (bgLum + 0.05) / (textLum + 0.05) >= 4.5
+    // So: textLum <= ((bgLum + 0.05) / 4.5) - 0.05
+    requiredTextLum = ((bgLuminance + 0.05) / minContrastRatio) - 0.05;
+  } else {
+    // For light text on dark background: (textLum + 0.05) / (bgLum + 0.05) >= 4.5
+    // So: textLum >= (bgLum + 0.05) * 4.5 - 0.05
+    requiredTextLum = (bgLuminance + 0.05) * minContrastRatio - 0.05;
+  }
+  
+  // Adjust RGB values to achieve required luminance while maintaining hue
+  let currentLum = getLuminance(textR, textG, textB);
+  let ratio = requiredTextLum / currentLum;
+  
+  if (needsDarkText) {
+    // Darken the color (move towards black)
+    textR = Math.max(0, Math.min(255, Math.round(textR * ratio)));
+    textG = Math.max(0, Math.min(255, Math.round(textG * ratio)));
+    textB = Math.max(0, Math.min(255, Math.round(textB * ratio)));
+  } else {
+    // Lighten the color (move towards white)
+    textR = Math.max(0, Math.min(255, Math.round(255 - (255 - textR) * (1 / ratio))));
+    textG = Math.max(0, Math.min(255, Math.round(255 - (255 - textG) * (1 / ratio))));
+    textB = Math.max(0, Math.min(255, Math.round(255 - (255 - textB) * (1 / ratio))));
+  }
+  
+  // Verify contrast ratio meets requirements, if not use pure black or white
+  let finalLum = getLuminance(textR, textG, textB);
+  let finalRatio = getContrastRatio(bgLuminance, finalLum);
+  
+  if (finalRatio < minContrastRatio) {
+    // Fallback to pure black or white for maximum contrast
+    if (needsDarkText) {
+      return "rgb(0, 0, 0)"; // Pure black
+    } else {
+      return "rgb(255, 255, 255)"; // Pure white
+    }
+  }
+  
+  return `rgb(${textR}, ${textG}, ${textB})`;
+}
+
+function print(str, options = {}) {
   // Voeg nieuw item toe aan data structuur
   let newItem = {
-    type: "text",
+    type: options.type || "text",
     text: str,
     timestamp: Date.now()
   };
+  
+  // Voeg extra properties toe als die er zijn (bijv. backgroundColor voor color type)
+  if (options.backgroundColor) {
+    newItem.backgroundColor = options.backgroundColor;
+    newItem.textColor = options.textColor || getContrastColor(options.backgroundColor);
+  }
   
   // Markeer alle bestaande items als 'old'
   displayItems.forEach(item => {
@@ -65,6 +157,18 @@ function renderDisplay() {
         img.className = "display-glyph";
         card.appendChild(img);
       });
+    } else if (item.type === "color") {
+      // Render color item with custom background and text color
+      let textSpan = document.createElement("span");
+      textSpan.textContent = capitalizeSentences(item.text);
+      textSpan.style.fontWeight = "bold";
+      if (item.backgroundColor) {
+        card.style.backgroundColor = item.backgroundColor;
+      }
+      if (item.textColor) {
+        textSpan.style.color = item.textColor;
+      }
+      card.appendChild(textSpan);
     } else {
       // Render text - gebruik span voor consistente flex layout
       let textSpan = document.createElement("span");
