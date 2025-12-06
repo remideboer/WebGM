@@ -51,39 +51,6 @@ function fallbackCopyText(text) {
 // Tabel structuur: [min, bold, max] per cel
 // ODDS: 0=Certain, 1=Nearly Certain, 2=Very Likely, 3=Likely, 4=50/50, 5=Unlikely, 6=Very Unlikely, 7=Nearly Impossible, 8=Impossible
 // CHAOS FACTOR: 1-9
-const mythicTable = [
-  // Certain (0)
-  [[10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null], [20, 99, null], [20, 99, null]],
-  // Nearly Certain (1)
-  [[7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null], [20, 99, null]],
-  // Very Likely (2)
-  [[5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null]],
-  // Likely (3)
-  [[3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100]],
-  // 50/50 (4)
-  [[2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99]],
-  // Unlikely (5)
-  [[1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98]],
-  // Very Unlikely (6)
-  [[null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96]],
-  // Nearly Impossible (7)
-  [[null, 1, 81], [null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94]],
-  // Impossible (8)
-  [[null, 1, 81], [null, 1, 81], [null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91]]
-];
-
-const oddsLabels = [
-  "Certain",
-  "Nearly Certain",
-  "Very Likely",
-  "Likely",
-  "50/50",
-  "Unlikely",
-  "Very Unlikely",
-  "Nearly Impossible",
-  "Impossible"
-];
-
 /**
  * Pure function: Gets the table cell value for given odds and chaos factor
  * @param {number} oddsIndex - Index of the odds (0-8)
@@ -310,24 +277,6 @@ function chaosShowValue(newValue) {
 
 // Draw a card - Poker
 
-let pokerValues = [
-  "ace",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "ten",
-  "jack",
-  "queen",
-  "king",
-];
-let pokerSuites = ["spades", "diamonds", "clubs", "hearts"];
-let pokerJokers = ["red joker", "black joker"];
-
 function poker() {
   let joker = Math.floor(Math.random() * 54);
   let pokerCard = randomPick(pokerValues) + " of " + randomPick(pokerSuites);
@@ -338,48 +287,6 @@ function poker() {
 }
 
 // Draw a card - tarot
-
-let majorArcana = [
-  "the fool",
-  "the magician",
-  "the high priestess",
-  "the empress",
-  "the emperor",
-  "the hierophant",
-  "the lovers",
-  "the chariot",
-  "strength",
-  "the hermit",
-  "wheel of fortune",
-  "justice",
-  "the hanged man",
-  "death",
-  "temperance",
-  "the devil",
-  "the tower",
-  "the star",
-  "the moon",
-  "the sun",
-  "judgement",
-  "the world",
-];
-let minorValues = [
-  "ace",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "ten",
-  "page",
-  "knight",
-  "queen",
-  "king",
-];
-let minorSuites = ["wands", "cups", "swords", "pentacles"];
 
 function tarot() {
   let arcana = Math.floor(Math.random() * 78);
@@ -392,230 +299,25 @@ function tarot() {
 
 // Glyph
 
-let prefix = "glyphs/";
-let glyphs = [
-  "acid",
-  "ages",
-  "alien-bug",
-  "alien-stare",
-  "all-seeing-eye",
-  "amphora",
-  "android-mask",
-  "angel-wings",
-  "aquarium",
-  "architect-mask",
-  "awareness",
-  "barbed-coil",
-  "battery-pack-alt",
-  "beard",
-  "beech",
-  "bestial-fangs",
-  "big-wave",
-  "bindle",
-  "bird-mask",
-  "black-cat",
-  "black-hole-bolas",
-  "blindfold",
-  "body-swapping",
-  "boiling-bubbles",
-  "bolt-eye",
-  "bowen-knot",
-  "branch-arrow",
-  "breaking-chain",
-  "bubbling-bowl",
-  "bubbling-flask",
-  "burning-book",
-  "burning-meteor",
-  "burning-passion",
-  "calavera",
-  "card-joker",
-  "carnyx",
-  "cauldron",
-  "chained-heart",
-  "chalice-drops",
-  "chameleon-glyph",
-  "clover",
-  "cobweb",
-  "coma",
-  "concrete-bag",
-  "convince",
-  "coronation",
-  "crown-coin",
-  "crowned-heart",
-  "crowned-skull",
-  "crystalize",
-  "cultist",
-  "cursed-star",
-  "cyber-eye",
-  "cyborg-face",
-  "cycle",
-  "dagger-rose",
-  "dark-squad",
-  "deathcap",
-  "defibrilate",
-  "delighted",
-  "desert-skull",
-  "despair",
-  "direwolf",
-  "disintegrate",
-  "distraction",
-  "double-face-mask",
-  "dove",
-  "dozen",
-  "drakkar",
-  "dread",
-  "drink-me",
-  "dripping-star",
-  "ecology",
-  "egg-clutch",
-  "egyptian-pyramids",
-  "energy-shield",
-  "enlightenment",
-  "entangled-typhoon",
-  "evil-bat",
-  "evil-moon",
-  "evil-wings",
-  "eye-of-horus",
-  "eye-target",
-  "fangs-circle",
-  "fire-ace",
-  "fire-bottle",
-  "fire-dash",
-  "fire-silhouette",
-  "fishing-hook",
-  "fleshy-mass",
-  "forest",
-  "fox-head",
-  "freedom-dove",
-  "frontal-lobe",
-  "frostfire",
-  "fruiting",
-  "fuji",
-  "gas-mask",
-  "gem-chain",
-  "ghost-ally",
-  "gift-of-knowledge",
-  "gluttonous-smile",
-  "gooey-sword",
-  "gorilla",
-  "guarded-tower",
-  "hair-strands",
-  "halt",
-  "harpy",
-  "heart-bottle",
-  "heart-drop",
-  "heptagram",
-  "hole-ladder",
-  "holy-grail",
-  "holy-oak",
-  "ice-bolt",
-  "iceberg",
-  "id-card",
-  "ink-swirl",
-  "inner-self",
-  "invisible",
-  "ivory-tusks",
-  "juggler",
-  "keyring",
-  "knot",
-  "lamprey-mouth",
-  "life-in-the-balance",
-  "love-mystery",
-  "mad-scientist",
-  "magic-gate",
-  "marrow-drain",
-  "medieval-pavilion",
-  "minerals",
-  "moebius-star",
-  "mute",
-  "nothing-to-say",
-  "octoman",
-  "oily-spiral",
-  "one-eyed",
-  "ouroboros",
-  "overmind",
-  "paw-heart",
-  "pegasus",
-  "pierced-heart",
-  "piercing-sword",
-  "pirate-flag",
-  "pirate-grave",
-  "plague-doctor-profile",
-  "plants-and-animals",
-  "plesiosaurus",
-  "poison",
-  "poker-hand",
-  "prayer",
-  "processor",
-  "pyromaniac",
-  "radial-balance",
-  "rainbow-star",
-  "raise-skeleton",
-  "revolt",
-  "ringing-bell",
-  "river",
-  "roman-shield",
-  "rupee",
-  "scythe",
-  "secret-door",
-  "serrated-slash",
-  "shaking-hands",
-  "shark-fin",
-  "shield-echoes",
-  "shiny-purse",
-  "shouting",
-  "shuriken",
-  "sickle",
-  "sinking-ship",
-  "sinking-trap",
-  "skeleton-key",
-  "slalom",
-  "slashed-shield",
-  "sleepy",
-  "sly",
-  "smoke-bomb",
-  "sound-waves",
-  "spatter",
-  "spiked-armor",
-  "spiky-eclipse",
-  "spiral-arrow",
-  "spiral-tentacle",
-  "sprout",
-  "spy",
-  "star-sattelites",
-  "stars-stack",
-  "stigmata",
-  "stork-delivery",
-  "striped-sun",
-  "stump-regrowth",
-  "suits",
-  "sun-radiations",
-  "sun",
-  "surprised-skull",
-  "surrounded-eye",
-  "swamp",
-  "swan-breeze",
-  "swiss-army-knife",
-  "sword-break",
-  "tear-tracks",
-  "telepathy",
-  "temptation",
-  "tesla-coil",
-  "thor-fist",
-  "totem-head",
-  "totem",
-  "trojan-horse",
-  "two-shadows",
-  "vine-flower",
-  "volcano",
-  "voodoo-doll",
-  "wave-strike",
-  "winged-emblem",
-  "wingfoot",
-  "yin-yang",
-];
-
 function displayImage() {
+  // Check if glyphs and prefix are available
+  if (typeof glyphs === 'undefined') {
+    console.error("glyphs is not defined. Make sure data/game.js is loaded.");
+    return;
+  }
+  if (typeof prefix === 'undefined') {
+    console.error("prefix is not defined. Make sure data/game.js is loaded.");
+    return;
+  }
+  if (typeof displayItems === 'undefined') {
+    console.error("displayItems is not defined. Make sure js-utility.js is loaded.");
+    return;
+  }
+  if (typeof renderDisplay === 'undefined') {
+    console.error("renderDisplay is not defined. Make sure js-utility.js is loaded.");
+    return;
+  }
+  
   let glyphNameA = randomPick(glyphs);
   let glyphNameB = randomPick(glyphs);
   let glyphNameC = randomPick(glyphs);
@@ -645,7 +347,9 @@ function displayImage() {
   
   // Scroll naar beneden voor nieuwe content
   let display = document.getElementById("display");
-  display.scrollTop = display.scrollHeight;
+  if (display) {
+    display.scrollTop = display.scrollHeight;
+  }
 }
 
 // Roll custom dice
@@ -712,34 +416,6 @@ function fudgefate() {
 }
 
 // Damage
-
-let severity = [
-  "life-threatening",
-  "life-threatening",
-  "critical",
-  "critical",
-  "critical",
-  "severe",
-  "severe",
-  "severe",
-  "moderate",
-  "moderate",
-  "moderate",
-  "moderate",
-  "moderate",
-  "moderate",
-  "minor",
-  "minor",
-  "minor",
-  "minor",
-  "minor",
-  "minor",
-  "negligible",
-  "negligible",
-  "negligible",
-];
-
-let area = ["head", "torso", "left arm", "right arm", "left leg", "right leg"];
 
 function damageShowValue(newValue) {
   newValue = newValue;
