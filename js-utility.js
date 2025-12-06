@@ -35,13 +35,55 @@ function print(str) {
 function renderDisplay() {
   let display = document.getElementById("display");
   display.innerHTML = "";
-  
+
   displayItems.forEach((item, index) => {
     let card = document.createElement("div");
     card.className = "display-card " + (item.isOld ? "old" : "new");
     card.textContent = item.text;
     display.appendChild(card);
   });
+}
+
+// Message notification system
+function showMessage(message, type = "success") {
+  let messageDiv = document.getElementById("message-notification");
+  
+  // Reset classes
+  messageDiv.className = "message-notification";
+  
+  // Add type class
+  messageDiv.classList.add(type);
+  
+  // Set message text
+  messageDiv.textContent = message;
+  
+  // Show message
+  setTimeout(() => {
+    messageDiv.classList.add("show");
+  }, 10);
+  
+  // Auto fade out after 5 seconds
+  let fadeTimeout = setTimeout(() => {
+    hideMessage();
+  }, 5000);
+  
+  // Click to close
+  messageDiv.onclick = () => {
+    clearTimeout(fadeTimeout);
+    hideMessage();
+  };
+}
+
+function hideMessage() {
+  let messageDiv = document.getElementById("message-notification");
+  messageDiv.classList.remove("show");
+  messageDiv.classList.add("fade-out");
+  
+  // Remove fade-out class after animation
+  setTimeout(() => {
+    messageDiv.classList.remove("fade-out");
+    messageDiv.className = "message-notification";
+  }, 300);
 }
 
 function inside(needle, haystack) {

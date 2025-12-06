@@ -9,7 +9,7 @@ function toClipboard() {
   // Gebruik moderne Clipboard API
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(textToCopy).then(() => {
-      alert("Copied all notes");
+      showMessage("Copied all notes", "success");
     }).catch(err => {
       console.error("Failed to copy: ", err);
       // Fallback naar oude methode
@@ -31,9 +31,10 @@ function fallbackCopyText(text) {
   textArea.select();
   try {
     document.execCommand("copy");
-    alert("Copied all notes");
+    showMessage("Copied all notes", "success");
   } catch (err) {
     console.error("Fallback copy failed: ", err);
+    showMessage("Failed to copy text", "error");
   }
   document.body.removeChild(textArea);
 }
