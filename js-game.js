@@ -249,6 +249,61 @@ function mythicDecision() {
   });
 }
 
+function mythicDecisionManual() {
+  const oddsIndex = parseInt(document.getElementById("oddsSelect").value);
+  const chaosFactor = parseInt(document.getElementById("chaosFactor").value);
+  
+  // Get manual roll value
+  const manualRollInput = document.getElementById("manualRoll");
+  const rollValue = parseInt(manualRollInput.value);
+  
+  // Validate input: must be between 1 and 100
+  if (isNaN(rollValue) || rollValue < 1 || rollValue > 100) {
+    showMessage("Please enter a number between 1 and 100", "error");
+    manualRollInput.focus();
+    return;
+  }
+  
+  // Get table value
+  const tableCell = getMythicTableValue(oddsIndex, chaosFactor);
+  if (!tableCell) {
+    print("Error: Invalid odds or chaos factor");
+    return;
+  }
+  
+  const [exceptionalYesThreshold, yesTarget, exceptionalNoThreshold] = tableCell;
+  
+  // Use manual roll value instead of random
+  const roll = rollValue;
+  
+  // Calculate result using pure function
+  const { result, resultType } = calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, exceptionalNoThreshold);
+  
+  // Determine background color based on result type
+  let backgroundColor = null;
+  let textColor = "#FFFFFF"; // White text for colored backgrounds
+  
+  if (resultType === "yes") {
+    backgroundColor = "#4CAF50"; // Green for Yes
+  } else if (resultType === "yes-and") {
+    backgroundColor = "#2E7D32"; // Darker, more saturated green for Yes, and...
+  } else if (resultType === "no") {
+    backgroundColor = "#FFB74D"; // Warning color for No
+  } else if (resultType === "no-and") {
+    backgroundColor = "#E57373"; // Error color for No, and...
+  }
+  
+  // Display result with appropriate colors
+  print(result, {
+    type: "mythic",
+    backgroundColor: backgroundColor,
+    textColor: textColor
+  });
+  
+  // Clear input after successful use
+  manualRollInput.value = "";
+}
+
 function chaosShowValue(newValue) {
   document.getElementById("chaosValue").textContent = newValue;
 }
