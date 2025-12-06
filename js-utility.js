@@ -74,7 +74,8 @@ function showMessage(message, type = "success") {
   // Set message text
   messageDiv.textContent = message;
   
-  // Show message
+  // Show message - eerst display block, dan fade in
+  messageDiv.style.display = "block";
   setTimeout(() => {
     messageDiv.classList.add("show");
   }, 10);
@@ -96,10 +97,11 @@ function hideMessage() {
   messageDiv.classList.remove("show");
   messageDiv.classList.add("fade-out");
   
-  // Remove fade-out class after animation
+  // Remove fade-out class and hide after animation
   setTimeout(() => {
     messageDiv.classList.remove("fade-out");
     messageDiv.className = "message-notification";
+    messageDiv.style.display = "none";
   }, 300);
 }
 
