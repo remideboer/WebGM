@@ -23,14 +23,15 @@
 	--message-text-error: #721c24; /* Dark red */
 	
 	/* Layout variabelen - Modulair aanpasbaar */
-	--display-width: 90%;
-	--display-max-width: 800px;
-	--controls-width: 90%;
-	--controls-max-width: 800px;
+	--display-width: 95%;
+	--display-max-width: 1200px;
+	--controls-width: 95%;
+	--controls-max-width: 1200px;
 	--subgroups-per-row: 2; /* Aantal subgroepen per regel */
-	--subgroup-gap: 25px; /* Ruimte tussen subgroepen */
-	--subgroup-padding-horizontal: 8px; /* Horizontale padding in subgroepen */
-	--subgroup-padding-vertical: 15px; /* Verticale padding in subgroepen */
+	--subgroup-gap: 20px; /* Ruimte tussen subgroepen */
+	--subgroup-padding-horizontal: 10px; /* Horizontale padding in subgroepen */
+	--subgroup-padding-vertical: 12px; /* Verticale padding in subgroepen */
+	--group-margin: 15px; /* Margin tussen groepen */
 }
 
 /* Group centering */
@@ -38,30 +39,31 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	margin: 10px 0;
+	margin: var(--group-margin) 0;
 }
 
 .display-group {
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 15px;
+	margin-bottom: var(--group-margin);
 }
 
 .glyph-group {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	margin-bottom: 20px;
+	margin-bottom: var(--group-margin);
 }
 
 .controls-group {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: var(--subgroup-gap);
-	align-items: start;
+	align-items: stretch;
 	text-align: center;
 	width: var(--controls-width);
 	max-width: var(--controls-max-width);
 	margin: 0 auto;
+	padding: 0 10px;
 }
 
 .control-subgroup {
@@ -70,12 +72,15 @@
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	background-color: #f9f9f9;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .subgroup-header {
-	margin: 0 0 15px 0;
+	margin: 0 0 10px 0;
 	padding: 0;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
 	color: #333;
 	text-align: center;
@@ -85,7 +90,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 10px;
+	gap: 8px;
+	flex: 1;
+	justify-content: flex-start;
 }
 
 .button-row {
