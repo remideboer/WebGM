@@ -44,15 +44,9 @@ const CreatureGenerator = {
 const MagicGenerator = {
   // Initialize wildDurations and extended lists after animalList is loaded
   _initialize() {
-    if (typeof wildDurations === 'undefined') {
-      wildDurations = goodWildDurations.concat(badWildDurations);
-    }
-    if (typeof summonList !== 'undefined' && typeof animalList !== 'undefined') {
-      summonList = summonList.concat(animalList);
-      summonCreatureList = summonCreatureList.concat(animalList);
-      attractList = attractList.concat(animalList);
-      thinkAreList = thinkAreList.concat(animalList);
-    }
+    // Arrays are already initialized at module load time (see bottom of file)
+    // This function is kept for backward compatibility but does nothing
+    // as the initialization happens once when the module loads
   },
 
   generate() {
