@@ -65,10 +65,18 @@ body {
 }
 
 .display-group {
-	margin-top: 15px;
-	margin-bottom: var(--group-margin);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	margin: 0;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: var(--bg-primary);
+	z-index: 100;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .controls-group {
 	display: grid;
@@ -79,6 +87,7 @@ body {
 	width: var(--controls-width);
 	max-width: var(--controls-max-width);
 	margin: 0 auto;
+	margin-top: 340px; /* 300px display height + 20px padding top + 20px spacing */
 	padding: var(--subgroup-gap);
 	box-sizing: border-box;
 }
@@ -251,6 +260,7 @@ span {
 	width: var(--display-width);
 	max-width: var(--display-max-width);
 	height: 300px;
+	max-height: 30vh;
 	border: 1px solid var(--border-primary);
 	padding: 10px;
 	overflow-y: auto;
@@ -259,6 +269,112 @@ span {
 	font-family: Arial, sans-serif;
 	display: flex;
 	flex-direction: column-reverse;
+	margin: 0 auto;
+}
+
+/* Mobile portrait mode responsive layout */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+	.display-group {
+		padding: 8px;
+	}
+	
+	#display {
+		width: 100%;
+		max-width: 100%;
+		height: 33.33vh;
+		max-height: 33.33vh;
+		margin: 0;
+	}
+	
+	.controls-group {
+		margin-top: calc(33.33vh + 20px);
+		display: flex;
+		flex-direction: column;
+		grid-template-columns: 1fr;
+		width: 100%;
+		max-width: 100%;
+		padding: 10px;
+		gap: 10px;
+	}
+	
+	/* Small mobile screens */
+	@media screen and (max-height: 600px) {
+		#display {
+			height: 30vh;
+			max-height: 30vh;
+		}
+		
+		.controls-group {
+			margin-top: calc(30vh + 20px);
+		}
+	}
+	
+	.control-subgroup {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+	}
+	
+	.control-subgroup.expanded-solo,
+	.control-subgroup.collapsed-below {
+		max-width: 100%;
+		grid-column: 1;
+	}
+	
+	.button-row {
+		flex-wrap: wrap;
+	}
+	
+	.button-row button {
+		flex: 1 1 calc(50% - 5px);
+		min-width: 100px;
+		max-width: none;
+		font-size: 12px;
+		padding: 6px 12px;
+	}
+	
+	.control-row {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 8px;
+	}
+	
+	.control-row label {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 5px;
+		width: 100%;
+	}
+	
+	.control-row label input[type="range"] {
+		width: 100%;
+	}
+	
+	.subgroup-header {
+		font-size: 13px;
+	}
+	
+	.subgroup-content {
+		gap: 6px;
+	}
+	
+	button {
+		font-size: 12px;
+		padding: 6px 12px;
+	}
+	
+	input[type="text"],
+	select {
+		width: 100%;
+		font-size: 14px;
+		box-sizing: border-box;
+	}
+	
+	.footer {
+		margin-top: 20px;
+		padding: 15px 0;
+		flex-shrink: 0;
+	}
 }
 
 .display-card {
