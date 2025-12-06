@@ -748,14 +748,20 @@ function damageShowValue(newValue) {
 
 function damage() {
   let hit = randomPick(area);
-  let damageNumber = Math.floor(Math.random() * severity.length);
-  let danger = document.getElementById("damageSlider").value - 4;
-  let change = damageNumber - danger;
-  if (change < 0) {
-    change = 0;
-  } else if (change > 20) {
-    change = 20;
-  }
-  let mod = severity[change];
+  
+  // Get danger level from slider (0-10)
+  let dangerLevel = parseInt(document.getElementById("damageSlider").value) || 1;
+  
+  // Calculate mean for bell curve based on danger level
+  // severity array has 21 items (0-20), where lower index = more severe
+  // danger 0 → mean ~18 (minor/negligible), danger 10 → mean ~1 (life-threatening/critical)
+  // Map danger level 0-10 to severity index 18-1 (inverted)
+  let mean = 18 - (dangerLevel * 1.7); // Maps 0-10 to ~18-1
+  
+  // Use bell curve distribution for more realistic results
+  // stdDev of 3 gives a nice spread around the mean
+  let severityIndex = bellCurvePick(mean, 3, severity.length);
+  
+  let mod = severity[severityIndex];
   print(mod + " hit to the " + hit);
 }
