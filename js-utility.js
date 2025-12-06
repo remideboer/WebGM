@@ -41,7 +41,22 @@ function renderDisplay() {
   displayItems.forEach((item, index) => {
     let card = document.createElement("div");
     card.className = "display-card " + (item.isOld ? "old" : "new");
-    card.textContent = item.text;
+    
+    if (item.type === "glyph") {
+      // Render glyph images
+      item.images.forEach(imageSrc => {
+        let img = document.createElement("img");
+        img.src = imageSrc;
+        img.className = "display-glyph";
+        card.appendChild(img);
+      });
+    } else {
+      // Render text - gebruik span voor consistente flex layout
+      let textSpan = document.createElement("span");
+      textSpan.textContent = item.text;
+      card.appendChild(textSpan);
+    }
+    
     display.appendChild(card);
   });
 }

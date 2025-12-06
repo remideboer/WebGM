@@ -47,12 +47,6 @@
 	margin-bottom: var(--group-margin);
 }
 
-.glyph-group {
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	margin-bottom: var(--group-margin);
-}
 
 .controls-group {
 	display: grid;
@@ -126,22 +120,6 @@
 	gap: 5px;
 }
 
-img#canvasA, img#canvasB, img#canvasC {
-	width: 100px;
-	height: 100px;
-	background-color: transparent;
-	border: 0 !important;
-	border-top: 0 !important;
-	border-right: 0 !important;
-	border-bottom: 0 !important;
-	border-left: 0 !important;
-	border-color: transparent !important;
-	border-width: 0 !important;
-	border-style: none !important;
-	outline: none !important;
-	display: inline-block;
-	vertical-align: top;
-}
 
 #display {
 	width: var(--display-width);
@@ -163,6 +141,10 @@ img#canvasA, img#canvasB, img#canvasC {
 	border-radius: 8px;
 	word-wrap: break-word;
 	transition: opacity 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
 }
 
 .display-card.new {
@@ -176,6 +158,15 @@ img#canvasA, img#canvasB, img#canvasC {
 	border: 1px solid var(--card-border-old);
 	color: var(--card-text-old);
 	opacity: var(--card-opacity-old);
+}
+
+/* Glyph images in display cards */
+.display-card .display-glyph {
+	max-width: 80px;
+	max-height: 80px;
+	object-fit: contain;
+	border: none;
+	outline: none;
 }
 
 /* Message notification */

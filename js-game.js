@@ -3,7 +3,15 @@
 function toClipboard() {
   // Verzamel alle tekst uit de data structuur (nieuwste eerst)
   let textToCopy = displayItems
-    .map(item => item.text)
+    .map(item => {
+      if (item.type === "glyph") {
+        // Voor glyphs: bestandsnamen zonder .png, gescheiden met komma
+        return item.glyphs.join(", ");
+      } else {
+        // Voor tekst items: gewoon de tekst
+        return item.text;
+      }
+    })
     .join("\n");
   
   // Gebruik moderne Clipboard API
@@ -372,12 +380,36 @@ let glyphs = [
 ];
 
 function displayImage() {
-  glyphA = prefix + randomPick(glyphs) + ".png";
-  glyphB = prefix + randomPick(glyphs) + ".png";
-  glyphC = prefix + randomPick(glyphs) + ".png";
-  document.getElementById("canvasA").src = glyphA;
-  document.getElementById("canvasB").src = glyphB;
-  document.getElementById("canvasC").src = glyphC;
+  let glyphNameA = randomPick(glyphs);
+  let glyphNameB = randomPick(glyphs);
+  let glyphNameC = randomPick(glyphs);
+  
+  let glyphA = prefix + glyphNameA + ".png";
+  let glyphB = prefix + glyphNameB + ".png";
+  let glyphC = prefix + glyphNameC + ".png";
+  
+  // Voeg glyphs toe aan display
+  let newItem = {
+    type: "glyph",
+    glyphs: [glyphNameA, glyphNameB, glyphNameC],
+    images: [glyphA, glyphB, glyphC],
+    timestamp: Date.now()
+  };
+  
+  // Markeer alle bestaande items als 'old'
+  displayItems.forEach(item => {
+    item.isOld = true;
+  });
+  
+  // Voeg nieuw item toe aan begin van array (nieuwste eerst voor copy functionaliteit)
+  displayItems.unshift(newItem);
+  
+  // Render alle items
+  renderDisplay();
+  
+  // Scroll naar beneden voor nieuwe content
+  let display = document.getElementById("display");
+  display.scrollTop = display.scrollHeight;
 }
 
 // Roll custom dice
