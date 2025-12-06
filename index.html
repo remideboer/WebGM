@@ -24,9 +24,26 @@
 			<div class="subgroup-content">
 				<button onclick="toClipboard()">Copy text</button>
 				<div class="control-row">
-					<button onclick="yesno()">Yes/No</button>
-					<input type="range" id="ynSlider" min="1" max="19" value="10" onchange="ynShowValue(this.value)">
-					<span id="chance">50% yes</span>
+					<label>Odds:
+						<select id="oddsSelect">
+							<option value="0">Certain</option>
+							<option value="1">Nearly Certain</option>
+							<option value="2">Very Likely</option>
+							<option value="3">Likely</option>
+							<option value="4" selected>50/50</option>
+							<option value="5">Unlikely</option>
+							<option value="6">Very Unlikely</option>
+							<option value="7">Nearly Impossible</option>
+							<option value="8">Impossible</option>
+						</select>
+					</label>
+					<label>Chaos Factor:
+						<input type="range" id="chaosFactor" min="1" max="9" value="5" onchange="chaosShowValue(this.value)">
+						<span id="chaosValue">5</span>
+					</label>
+				</div>
+				<div class="control-row">
+					<button onclick="mythicDecision()">Mythic Decision</button>
 				</div>
 				<div class="button-row">
 					<button onclick="poker()">Poker Card</button>

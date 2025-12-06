@@ -32,8 +32,8 @@
 	--message-text-error: #1F3A3D; /* Donker teal-grijs */
 	
 	/* Layout variabelen - Modulair aanpasbaar */
-	--display-width: 95%;
-	--display-max-width: 1200px;
+	--display-width: 650px; /* Fixed ergonomische leesbreedte (50-75 karakters) */
+	--display-max-width: 650px;
 	--controls-width: 95%;
 	--controls-max-width: 1200px;
 	--subgroups-per-row: 2; /* Aantal subgroepen per regel */
@@ -162,18 +162,21 @@ button:active {
 
 /* Input styling */
 input[type="text"],
-input[type="range"] {
+input[type="range"],
+select {
 	color: var(--text-primary);
 	border: 1px solid var(--border-primary);
 	background-color: var(--card-bg);
 }
 
-input[type="text"] {
+input[type="text"],
+select {
 	padding: 4px 8px;
 	border-radius: 4px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+select:focus {
 	outline: none;
 	border-color: var(--accent-primary);
 }

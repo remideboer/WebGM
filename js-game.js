@@ -47,29 +47,192 @@ function fallbackCopyText(text) {
   document.body.removeChild(textArea);
 }
 
-// Y/N
+// Mythic GM 2e Decision Table
+// Tabel structuur: [min, bold, max] per cel
+// ODDS: 0=Certain, 1=Nearly Certain, 2=Very Likely, 3=Likely, 4=50/50, 5=Unlikely, 6=Very Unlikely, 7=Nearly Impossible, 8=Impossible
+// CHAOS FACTOR: 1-9
+const mythicTable = [
+  // Certain (0)
+  [[10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null], [20, 99, null], [20, 99, null]],
+  // Nearly Certain (1)
+  [[7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null], [20, 99, null]],
+  // Very Likely (2)
+  [[5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null]],
+  // Likely (3)
+  [[3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100]],
+  // 50/50 (4)
+  [[2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99]],
+  // Unlikely (5)
+  [[1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98]],
+  // Very Unlikely (6)
+  [[null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96]],
+  // Nearly Impossible (7)
+  [[null, 1, 81], [null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94]],
+  // Impossible (8)
+  [[null, 1, 81], [null, 1, 81], [null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91]]
+];
 
-function yesno() {
-  let yn = Math.random();
-  let answer = "";
-  let ynAnd = [", and...", ", but...", ", because..."];
-  let ynAndChance = Math.random();
-  let chance = document.getElementById("ynSlider").value / 20;
-  yn = yn + chance;
-  if (yn > 1) {
-    answer = "yes";
-  } else {
-    answer = "no";
+const oddsLabels = [
+  "Certain",
+  "Nearly Certain",
+  "Very Likely",
+  "Likely",
+  "50/50",
+  "Unlikely",
+  "Very Unlikely",
+  "Nearly Impossible",
+  "Impossible"
+];
+
+/**
+ * Pure function: Gets the table cell value for given odds and chaos factor
+ * @param {number} oddsIndex - Index of the odds (0-8)
+ * @param {number} chaosFactor - Chaos factor (1-9)
+ * @returns {Array|null} The table cell [exceptionalYesThreshold, yesTarget, exceptionalNoThreshold] or null if invalid
+ */
+function getMythicTableValue(oddsIndex, chaosFactor) {
+  if (oddsIndex < 0 || oddsIndex >= mythicTable.length) {
+    return null;
   }
-  if (ynAndChance > 0.5) {
-    answer = answer + randomPick(ynAnd);
+  const chaosIndex = chaosFactor - 1; // Convert 1-9 to 0-8
+  if (chaosIndex < 0 || chaosIndex >= mythicTable[oddsIndex].length) {
+    return null;
   }
-  print(answer);
+  return mythicTable[oddsIndex][chaosIndex];
 }
 
-function ynShowValue(newValue) {
-  newValue = newValue * 5;
-  document.getElementById("chance").innerHTML = newValue + "% yes";
+/**
+ * Pure function: Calculates the Mythic GM result based on roll and table values
+ * @param {number} roll - The d100 roll result (1-100)
+ * @param {number|null} exceptionalYesThreshold - Lower threshold for Exceptional Yes
+ * @param {number} yesTarget - The Yes target (roll ≤ this = Yes)
+ * @param {number|null} exceptionalNoThreshold - Upper threshold for Exceptional No
+ * @returns {Object} Object with {result: string, resultType: string}
+ */
+function calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, exceptionalNoThreshold) {
+  // Validate inputs
+  if (roll < 1 || roll > 100) {
+    throw new Error("Roll must be between 1 and 100");
+  }
+  if (yesTarget < 1 || yesTarget > 100) {
+    throw new Error("Yes target must be between 1 and 100");
+  }
+  
+  let result = "";
+  let resultType = "";
+  
+  // Mythic GM 2e logic:
+  // - bold (yesTarget) is the Yes target: roll ≤ yesTarget = Yes, roll > yesTarget = No
+  // - min (exceptionalYesThreshold) is the Exceptional Yes threshold (bottom 20% of Yes range)
+  // - max (exceptionalNoThreshold) is the Exceptional No threshold (upper band of No range)
+  
+  if (exceptionalYesThreshold === null) {
+    // Special case: x **1** threshold (Impossible/Very Unlikely with low CF)
+    // Yes target = 1, so roll 1 = Yes, roll 2-100 = No
+    if (roll <= yesTarget) {
+      // Roll 1 = Exceptional Yes (YES AND) - this is the only Yes result
+      result = "YES AND";
+      resultType = "yes-and";
+    } else {
+      // Roll 2-100 = No
+      if (exceptionalNoThreshold !== null && roll > exceptionalNoThreshold) {
+        result = "NO AND";
+        resultType = "no-and";
+      } else {
+        result = "NO";
+        resultType = "no";
+      }
+    }
+  } else if (exceptionalNoThreshold === null) {
+    // Special case: threshold **99** x (Certain with high CF)
+    // Yes target = 99, so roll 1-99 = Yes, roll 100 = No
+    if (roll <= yesTarget) {
+      // Roll 1-99 = Yes
+      if (roll <= exceptionalYesThreshold) {
+        result = "YES AND";
+        resultType = "yes-and";
+      } else {
+        result = "YES";
+        resultType = "yes";
+      }
+    } else {
+      // Roll 100 = Exceptional No (NO AND)
+      result = "NO AND";
+      resultType = "no-and";
+    }
+  } else {
+    // Normal case: [exceptionalYesThreshold] **[yesTarget]** [exceptionalNoThreshold]
+    // First determine Yes/No based on yesTarget
+    if (roll <= yesTarget) {
+      // Yes range: 1 to yesTarget
+      if (roll <= exceptionalYesThreshold) {
+        result = "YES AND";
+        resultType = "yes-and";
+      } else {
+        result = "YES";
+        resultType = "yes";
+      }
+    } else {
+      // No range: (yesTarget + 1) to 100
+      if (roll > exceptionalNoThreshold) {
+        result = "NO AND";
+        resultType = "no-and";
+      } else {
+        result = "NO";
+        resultType = "no";
+      }
+    }
+  }
+  
+  return { result, resultType };
+}
+
+/**
+ * Pure function: Formats the output string for display
+ * @param {string} result - The result string (YES, NO, YES AND, NO AND)
+ * @param {number} oddsIndex - Index of the odds (0-8)
+ * @param {number} chaosFactor - Chaos factor (1-9)
+ * @param {number} roll - The d100 roll result
+ * @param {Array} tableCell - The table cell [exceptionalYesThreshold, yesTarget, exceptionalNoThreshold]
+ * @returns {string} Formatted output string
+ */
+function formatMythicOutput(result, oddsIndex, chaosFactor, roll, tableCell) {
+  const [exceptionalYesThreshold, yesTarget, exceptionalNoThreshold] = tableCell;
+  const oddsLabel = oddsLabels[oddsIndex];
+  const rangeStr = exceptionalYesThreshold !== null ? exceptionalYesThreshold : 'x';
+  const rangeStr2 = exceptionalNoThreshold !== null ? exceptionalNoThreshold : 'x';
+  return `${result} (Odds: ${oddsLabel}, CF: ${chaosFactor}, Roll: ${roll}, Range: ${rangeStr}-${yesTarget}-${rangeStr2})`;
+}
+
+/**
+ * Main function: Handles DOM interaction and calls pure functions
+ * This function is not easily testable but delegates to testable pure functions
+ */
+function mythicDecision() {
+  const oddsIndex = parseInt(document.getElementById("oddsSelect").value);
+  const chaosFactor = parseInt(document.getElementById("chaosFactor").value);
+  
+  // Get table value
+  const tableCell = getMythicTableValue(oddsIndex, chaosFactor);
+  if (!tableCell) {
+    print("Error: Invalid odds or chaos factor");
+    return;
+  }
+  
+  const [exceptionalYesThreshold, yesTarget, exceptionalNoThreshold] = tableCell;
+  
+  // Roll d100
+  const roll = Math.floor(Math.random() * 100) + 1;
+  
+  // Calculate result using pure function
+  const { result } = calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, exceptionalNoThreshold);
+  
+  // Display only the result
+  print(result);
+}
+
+function chaosShowValue(newValue) {
+  document.getElementById("chaosValue").textContent = newValue;
 }
 
 // Draw a card - Poker
