@@ -208,6 +208,7 @@ span {
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
+	font-weight: bold;
 }
 
 .display-card.new {

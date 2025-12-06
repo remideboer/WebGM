@@ -8,6 +8,21 @@ function randomPick(array) {
   return array[randomNumber];
 }
 
+// Capitalize first letter of each sentence
+function capitalizeSentences(text) {
+  if (!text || text.length === 0) return text;
+  
+  // Capitalize first letter of the entire text
+  let result = text.charAt(0).toUpperCase() + text.slice(1);
+  
+  // Capitalize first letter after sentence endings (. ! ?) followed by space
+  result = result.replace(/([.!?]\s+)([a-z])/g, function(match, punctuation, letter) {
+    return punctuation + letter.toUpperCase();
+  });
+  
+  return result;
+}
+
 function print(str) {
   // Voeg nieuw item toe aan data structuur
   let newItem = {
@@ -53,7 +68,9 @@ function renderDisplay() {
     } else {
       // Render text - gebruik span voor consistente flex layout
       let textSpan = document.createElement("span");
-      textSpan.textContent = item.text;
+      // Capitalize sentences en maak tekst dikgedrukt
+      textSpan.textContent = capitalizeSentences(item.text);
+      textSpan.style.fontWeight = "bold";
       card.appendChild(textSpan);
     }
     
