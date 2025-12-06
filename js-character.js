@@ -2,9 +2,9 @@
 const CharacterGenerator = {
   // Name generator
   name() {
-    let syllable = [];
-    let sLength = randomPick(numS);
-    let vOrC = Math.random();
+    const syllable = [];
+    const sLength = randomPick(numS);
+    const vOrC = Math.random();
 
     //First letter
     if (vOrC > 0.66) {
@@ -21,7 +21,7 @@ const CharacterGenerator = {
         syllable.push(randomPick(consonants));
       } else {
         // when the last letter was not a vowel
-        let final = Math.random();
+        const final = Math.random();
         if (final > 0.75) {
           syllable.push(randomPick(vowels) + randomPick(finals));
         } else {
@@ -32,7 +32,7 @@ const CharacterGenerator = {
 
     //Last final for single syllables
     if (sLength == 1 && inside(syllable[1], vowels) == true) {
-      let fFinal = Math.random();
+      const fFinal = Math.random();
       if (fFinal > 0.25) {
         syllable.push(randomPick(finals));
       }
@@ -49,49 +49,49 @@ const CharacterGenerator = {
 
   // Character Generator - age, sex, characteristic
   character() {
-    let age = randomPick(ages);
-    let sex = randomPick(sexes);
-    let char = randomPick(characteristics);
+    const age = randomPick(ages);
+    const sex = randomPick(sexes);
+    const char = randomPick(characteristics);
     print(age + ", " + sex + ", " + char);
   },
 
   // Just Characteristic
   characteristic() {
-    let char = randomPick(characteristics);
+    const char = randomPick(characteristics);
     print(char);
   },
 
   // Role
   role() {
-    let role = randomPick(roles);
+    const role = randomPick(roles);
     print(role);
   },
 
   //Motivation
   motivation() {
-    let mot = randomPick(motVerb) + " " + randomPick(motNoun);
+    const mot = randomPick(motVerb) + " " + randomPick(motNoun);
     print(mot);
   },
 
   // Quirk
   quirk() {
-    let quirk = randomPick(quirks);
+    const quirk = randomPick(quirks);
     print("they " + quirk);
   },
 
   // Friendliness
   friendliness() {
     // Haal slider waarde op (-4 tot +4)
-    let sliderValue = parseInt(document.getElementById("friendlinessSlider").value) || 0;
+    const sliderValue = parseInt(document.getElementById("friendlinessSlider").value) || 0;
     
     // Bereken mean: index 4 is neutraal, verschuif op basis van slider
     // slider -4 = mean 0 (zeer hostile), slider 0 = mean 4 (neutraal), slider +4 = mean 8 (zeer friendly)
-    let mean = 4 + sliderValue;
+    const mean = 4 + sliderValue;
     
     // Gebruik bell curve distributie met stdDev 1.5 voor een mooie curve
-    let index = bellCurvePick(mean, 1.5, fof.length);
+    const index = bellCurvePick(mean, 1.5, fof.length);
     
-    let friendly = fof[index];
+    const friendly = fof[index];
     print(friendly + " the person");
   }
 };

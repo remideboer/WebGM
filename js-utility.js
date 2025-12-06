@@ -1,12 +1,12 @@
 // Utility and Display Objects
 
 // Data storage voor display items
-let displayItems = [];
+const displayItems = [];
 
 // Utility - General utility functions
 const Utility = {
   randomPick(array) {
-    let randomNumber = Math.floor(Math.random() * array.length);
+    const randomNumber = Math.floor(Math.random() * array.length);
     return array[randomNumber];
   },
 
@@ -19,9 +19,9 @@ const Utility = {
    */
   bellCurvePick(mean, stdDev, arrayLength) {
     // Genereer een normale distributie met Box-Muller transformatie
-    let u1 = Math.random();
-    let u2 = Math.random();
-    let z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+    const u1 = Math.random();
+    const u2 = Math.random();
+    const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
     
     // Pas mean en stdDev toe
     let value = mean + z0 * stdDev;
@@ -52,7 +52,7 @@ const Utility = {
   // Calculate relative luminance for contrast calculation
   getLuminance(r, g, b) {
     // Convert RGB to relative luminance
-    let [rs, gs, bs] = [r, g, b].map(val => {
+    const [rs, gs, bs] = [r, g, b].map(val => {
       val = val / 255;
       return val <= 0.03928 ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
     });
@@ -62,29 +62,29 @@ const Utility = {
   // Calculate contrast ratio between two colors
   getContrastRatio(lum1, lum2) {
     // L1 is the lighter color, L2 is the darker color
-    let L1 = Math.max(lum1, lum2);
-    let L2 = Math.min(lum1, lum2);
+    const L1 = Math.max(lum1, lum2);
+    const L2 = Math.min(lum1, lum2);
     return (L1 + 0.05) / (L2 + 0.05);
   },
 
   // Calculate contrast color that meets WCAG AA standards (minimum 4.5:1 ratio)
   getContrastColor(rgbString) {
     // Parse RGB string like "rgb(123, 45, 67)"
-    let match = rgbString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    const match = rgbString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
     if (!match) return "#000000"; // Default to black if parsing fails
     
-    let r = parseInt(match[1]);
-    let g = parseInt(match[2]);
-    let b = parseInt(match[3]);
+    const r = parseInt(match[1]);
+    const g = parseInt(match[2]);
+    const b = parseInt(match[3]);
     
     // Calculate background luminance
-    let bgLuminance = this.getLuminance(r, g, b);
+    const bgLuminance = this.getLuminance(r, g, b);
     
     // WCAG AA requires minimum 4.5:1 contrast ratio for normal text
     const minContrastRatio = 4.5;
     
     // Determine if we need dark or light text
-    let needsDarkText = bgLuminance > 0.5;
+    const needsDarkText = bgLuminance > 0.5;
     
     // Start with complementary color
     let textR = 255 - r;
@@ -104,8 +104,8 @@ const Utility = {
     }
     
     // Adjust RGB values to achieve required luminance while maintaining hue
-    let currentLum = this.getLuminance(textR, textG, textB);
-    let ratio = requiredTextLum / currentLum;
+    const currentLum = this.getLuminance(textR, textG, textB);
+    const ratio = requiredTextLum / currentLum;
     
     if (needsDarkText) {
       // Darken the color (move towards black)
@@ -120,8 +120,8 @@ const Utility = {
     }
     
     // Verify contrast ratio meets requirements, if not use pure black or white
-    let finalLum = this.getLuminance(textR, textG, textB);
-    let finalRatio = this.getContrastRatio(bgLuminance, finalLum);
+    const finalLum = this.getLuminance(textR, textG, textB);
+    const finalRatio = this.getContrastRatio(bgLuminance, finalLum);
     
     if (finalRatio < minContrastRatio) {
       // Fallback to pure black or white for maximum contrast
@@ -136,7 +136,7 @@ const Utility = {
   },
 
   inside(needle, haystack) {
-    let count = haystack.length;
+    const count = haystack.length;
     for (let i = 0; i < count; i++) {
       if (haystack[i] === needle) {
         return true;
@@ -146,7 +146,7 @@ const Utility = {
   },
 
   aan(string) {
-    let firstLetter = string[0];
+    const firstLetter = string[0];
     if (
       firstLetter == "a" ||
       firstLetter == "e" ||
@@ -166,7 +166,7 @@ const Utility = {
 const Display = {
   print(str, options = {}) {
     // Voeg nieuw item toe aan data structuur
-    let newItem = {
+    const newItem = {
       type: options.type || "text",
       text: str,
       timestamp: Date.now()
@@ -190,31 +190,31 @@ const Display = {
     this.render();
     
     // Scroll naar beneden voor nieuwe content
-    let display = document.getElementById("display");
+    const display = document.getElementById("display");
     display.scrollTop = display.scrollHeight;
   },
 
   render() {
-    let display = document.getElementById("display");
+    const display = document.getElementById("display");
     display.innerHTML = "";
 
     // Render array in normale volgorde (nieuwste eerst)
     // CSS flex-direction: column-reverse zorgt ervoor dat items onderaan worden gepositioneerd
     displayItems.forEach((item, index) => {
-      let card = document.createElement("div");
+      const card = document.createElement("div");
       card.className = "display-card " + (item.isOld ? "old" : "new");
       
       if (item.type === "glyph") {
         // Render glyph images
         item.images.forEach(imageSrc => {
-          let img = document.createElement("img");
+          const img = document.createElement("img");
           img.src = imageSrc;
           img.className = "display-glyph";
           card.appendChild(img);
         });
       } else if (item.type === "color") {
         // Render color item with custom background and text color
-        let textSpan = document.createElement("span");
+        const textSpan = document.createElement("span");
         textSpan.textContent = Utility.capitalizeSentences(item.text);
         textSpan.style.fontWeight = "bold";
         if (item.backgroundColor) {
@@ -226,7 +226,7 @@ const Display = {
         card.appendChild(textSpan);
       } else {
         // Render text - gebruik span voor consistente flex layout
-        let textSpan = document.createElement("span");
+        const textSpan = document.createElement("span");
         // Capitalize sentences en maak tekst dikgedrukt
         textSpan.textContent = Utility.capitalizeSentences(item.text);
         textSpan.style.fontWeight = "bold";
@@ -248,7 +248,7 @@ const Display = {
 
   copyToClipboard() {
     // Verzamel alle tekst uit de data structuur (nieuwste eerst)
-    let textToCopy = displayItems
+    const textToCopy = displayItems
       .map(item => {
         if (item.type === "glyph") {
           // Voor glyphs: bestandsnamen zonder .png, gescheiden met komma
@@ -276,7 +276,7 @@ const Display = {
   },
 
   _fallbackCopyText(text) {
-    let textArea = document.createElement("textarea");
+    const textArea = document.createElement("textarea");
     textArea.value = text;
     textArea.style.position = "fixed";
     textArea.style.left = "-999999px";

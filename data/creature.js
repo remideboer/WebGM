@@ -1,6 +1,6 @@
 // Creature Data Arrays
 
-let size = [
+const size = [
   "a small house",
   "an elephant",
   "a bear",
@@ -18,7 +18,7 @@ let size = [
   "a mouse",
 ];
 
-let like = [
+const like = [
   "a duck",
   "a cat",
   "a bat",
@@ -96,7 +96,7 @@ let like = [
   "a squirrel",
 ];
 
-let but = [
+const but = [
   "on stilts",
   "inside-out",
   "capable of flight",
@@ -139,7 +139,7 @@ let but = [
   "with the limbs bent backwards",
 ];
 
-let head = [
+const head = [
   "one eye",
   "no eyes",
   "huge eyes",
@@ -176,7 +176,7 @@ let head = [
   "a wide bill",
 ];
 
-let extras = [
+const extras = [
   "retractable claws",
   "six limbs",
   "a shaggy mane",
@@ -212,7 +212,7 @@ let extras = [
   "a barbed tail",
 ];
 
-let fight = [
+const fight = [
   "sharp quills",
   "the ability to discharge electricity",
   "can appear more dangerous than it really is",
@@ -236,7 +236,7 @@ let fight = [
   "exceedingly tough scales",
 ];
 
-let cover = [
+const cover = [
   "is covered in long, shaggy fur",
   "is completely bald",
   "is covered in soft, velvety down",
@@ -258,7 +258,7 @@ let cover = [
   "is covered in a mat of greenery",
 ];
 
-let color = [
+const color = [
   "purple",
   "blue",
   "green",
@@ -286,7 +286,7 @@ let color = [
   "iridescent",
 ];
 
-let design = [
+const design = [
   "striped with",
   "with small spots of",
   "with large, irregular spots of",

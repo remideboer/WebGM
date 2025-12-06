@@ -1,6 +1,6 @@
 // World/Scenario Data Arrays
 
-let genres = [
+const genres = [
   "high fantasy",
   "space opera",
   "western",
@@ -39,7 +39,7 @@ let genres = [
   "hard science-fiction",
 ];
 
-let events = [
+const events = [
   "you lose something important",
   "you find out you're surrounded",
   "the police are trying to arrest you",
@@ -135,7 +135,7 @@ let events = [
   "you find something precious",
 ];
 
-let settings = [
+const settings = [
   "an artisan's workshop",
   "a back alley",
   "a bank",
@@ -289,7 +289,7 @@ let settings = [
   "underground",
 ];
 
-let items = [
+const items = [
   "object d'art",
   "access card",
   "all-terrain vehicle",
@@ -609,7 +609,7 @@ let items = [
   "writing implement",
 ];
 
-let questTypeList = [
+const questTypeList = [
   "return",
   "retrieve",
   "destroy",
@@ -632,7 +632,7 @@ let questTypeList = [
   "protect",
 ];
 
-let questItems = [
+const questItems = [
   "object d'art",
   "ancient artifact",
   "ancient bone",
@@ -823,7 +823,7 @@ let questItems = [
   "writing implement",
 ];
 
-let questSettings = [
+const questSettings = [
   "a back alley",
   "a beach",
   "a black market",
@@ -910,7 +910,7 @@ let questSettings = [
   "the underground",
 ];
 
-let survive = [
+const survive = [
   "an icy winter",
   "a deadly plague",
   "a bandit attack",
@@ -933,9 +933,9 @@ let survive = [
   "a plague of locusts",
 ];
 
-let senseList = ["sound", "feeling", "smell"];
+const senseList = ["sound", "feeling", "smell"];
 
-let soundList = [
+const soundList = [
   "the buzzing of angry bees",
   "an echo",
   "the clinking of coins",
@@ -1071,7 +1071,7 @@ let soundList = [
   "the chirping of insects",
 ];
 
-let feelListSense = [
+const feelListSense = [
   "incredible hunger",
   "heavy humidity",
   "choking",
@@ -1184,7 +1184,7 @@ let feelListSense = [
   "something worn with time",
 ];
 
-let smellListSense = [
+const smellListSense = [
   "smoke",
   "the seaside",
   "rotting flesh",
@@ -1316,7 +1316,7 @@ let smellListSense = [
   "pepper",
 ];
 
-let soundModList = [
+const soundModList = [
   "in the distance",
   "nearby",
   "from right behind you",

@@ -2,11 +2,11 @@
 const WorldGenerator = {
   //genre generator
   genre() {
-    let genreA = randomPick(genres);
-    let genreB = randomPick(genres);
-    let genreC = randomPick(genres);
-    let genreNum = Math.floor(Math.random() * 3) + 1;
-    let genreArray = [genreA, genreB, genreC];
+    const genreA = randomPick(genres);
+    const genreB = randomPick(genres);
+    const genreC = randomPick(genres);
+    const genreNum = Math.floor(Math.random() * 3) + 1;
+    const genreArray = [genreA, genreB, genreC];
     let genreText = "";
     for (let i = 0; i < genreNum; i++) {
       genreText += genreArray[i] + " ";
@@ -16,17 +16,17 @@ const WorldGenerator = {
 
   // Event
   event() {
-    let event = randomPick(events);
+    const event = randomPick(events);
     print(event);
   },
 
   // Setting
   setting() {
-    let settingA = randomPick(settings);
-    let settingB = randomPick(settings);
-    let settingC = randomPick(settings);
-    let settingNum = Math.floor(Math.random() * 3) + 1;
-    let settingArray = [settingA, settingB, settingC];
+    const settingA = randomPick(settings);
+    const settingB = randomPick(settings);
+    const settingC = randomPick(settings);
+    const settingNum = Math.floor(Math.random() * 3) + 1;
+    const settingArray = [settingA, settingB, settingC];
     let settingText = "";
     for (let i = 0; i < settingNum; i++) {
       settingText += settingArray[i] + "... ";
@@ -36,19 +36,19 @@ const WorldGenerator = {
 
   // Item
   item() {
-    let item = aan(randomPick(items));
+    const item = aan(randomPick(items));
     print(item);
   },
 
   // Quest
   quest() {
-    let questType = randomPick(questTypeList);
+    const questType = randomPick(questTypeList);
     let questText = "";
-    let item = aan(randomPick(questItems));
-    let loc = randomPick(questSettings);
-    let obstacle = randomPick(survive);
-    let age = randomPick(ages);
-    let sex = randomPick(sexes);
+    const item = aan(randomPick(questItems));
+    const loc = randomPick(questSettings);
+    const obstacle = randomPick(survive);
+    const age = randomPick(ages);
+    const sex = randomPick(sexes);
     let char = "";
     if (
       age == "small child" ||
@@ -78,7 +78,7 @@ const WorldGenerator = {
         questType == "spy on" ||
         questType == "negotiate with": // char only
         questText = questType + " " + char;
-        let humanYN = Math.random();
+        const humanYN = Math.random();
         if (humanYN > 0.75) {
           questText += " of an unusual or monstrous species";
         }
@@ -87,7 +87,7 @@ const WorldGenerator = {
         questText = questType + " " + obstacle;
         break;
       case questType == "escape from":
-        let escape = randomPick([loc, char]);
+        const escape = randomPick([loc, char]);
         questText = questType + " " + escape;
         break;
       case questType == "investigate" ||
@@ -95,11 +95,11 @@ const WorldGenerator = {
         questType == "expose the secrets of" ||
         questType == "research" ||
         questType == "protect":
-        let anything = randomPick([item, loc, char]);
+        const anything = randomPick([item, loc, char]);
         questText = questType + " " + anything;
         break;
       case questType == "hunt down": // character or item
-        let charItem = randomPick([char, item]);
+        const charItem = randomPick([char, item]);
         questText = questType + " " + charItem;
         break;
       // prevent plans, spy on, negotiate with, escape from, hunt down
@@ -109,10 +109,10 @@ const WorldGenerator = {
 
   //Color
   color() {
-    let R_value = Math.floor(Math.random() * 255);
-    let G_value = Math.floor(Math.random() * 255);
-    let B_value = Math.floor(Math.random() * 255);
-    let rand_color = "rgb(" + R_value + ", " + G_value + ", " + B_value + ")";
+    const R_value = Math.floor(Math.random() * 255);
+    const G_value = Math.floor(Math.random() * 255);
+    const B_value = Math.floor(Math.random() * 255);
+    const rand_color = "rgb(" + R_value + ", " + G_value + ", " + B_value + ")";
     // Print with color type so display card uses this color as background
     print("color: " + rand_color, {
       type: "color",
@@ -122,13 +122,13 @@ const WorldGenerator = {
 
   //Animal
   animal() {
-    let animal = aan(randomPick(animalList));
+    const animal = aan(randomPick(animalList));
     print(animal);
   },
 
   //Sense
   sense() {
-    let senseType = randomPick(senseList);
+    const senseType = randomPick(senseList);
     let senseSnippet = "";
     if (senseType == "sound") {
       senseSnippet = randomPick(soundList) + " " + randomPick(soundModList);

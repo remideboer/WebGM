@@ -1,6 +1,6 @@
 // Magic Effects Data Arrays
 
-let magCatList = [
+const magCatList = [
   "abilityTo",
   "control",
   "transform",
@@ -13,7 +13,7 @@ let magCatList = [
 ];
 
 //durations
-let durationList = [
+const durationList = [
   "5 minutes",
   "10 minutes",
   "15 minutes",
@@ -33,7 +33,7 @@ let durationList = [
   "wildcard",
 ];
 
-let statusDurationList = [
+const statusDurationList = [
   "30 seconds",
   "2 minutes",
   "15 minutes",
@@ -41,7 +41,7 @@ let statusDurationList = [
   "3 days",
 ];
 
-let goodWildDurations = [
+const goodWildDurations = [
   "the next full moon",
   "justTarget are fully submersed in water",
   "justTarget commit an evil act",
@@ -51,7 +51,7 @@ let goodWildDurations = [
   "it is no longer necessary",
 ];
 
-let badWildDurations = [
+const badWildDurations = [
   "justTarget earn the love of a willing soul",
   "possesiveTarget quest ends",
   "justTarget slay a demon",
@@ -65,19 +65,19 @@ let badWildDurations = [
 ];
 
 //targets
-let directTargetList = ["you", "your chosen target"];
+const directTargetList = ["you", "your chosen target"];
 
-let areaTargetList = [
+const areaTargetList = [
   "you",
   "your chosen target",
   "everyone in sight",
   "whatever is most important nearby",
 ];
 
-let genTargetList = ["you", "your chosen target", "everyone in sight"];
+const genTargetList = ["you", "your chosen target", "everyone in sight"];
 
 //magCats
-let abilityToList = [
+const abilityToList = [
   "hold possesiveTarget breath indefinitely",
   "phase through objects",
   "turn invisible",
@@ -135,7 +135,7 @@ let abilityToList = [
   "enter the mirror realm",
 ];
 
-let abilityAbsoluteList = [
+const abilityAbsoluteList = [
   "hold possesiveTarget breath indefinitely",
   "never tire",
   "move at super-speed",
@@ -152,7 +152,7 @@ let abilityAbsoluteList = [
   "enter the mirror realm",
 ];
 
-let controlList = [
+const controlList = [
   "ants",
   "worms",
   "beetles",
@@ -246,7 +246,7 @@ let controlList = [
   "a spectral hand",
 ];
 
-let immunityList = [
+const immunityList = [
   "poison",
   "paralysis",
   "compulsions",
@@ -279,7 +279,7 @@ let immunityList = [
   "disease",
 ];
 
-let bodyChangeList = [
+const bodyChangeList = [
   "arms turn into wings",
   "body sprouts an eyeball",
   "face grows a third eyeball",
@@ -336,7 +336,7 @@ let bodyChangeList = [
   "clothing spontaneously disintegrates",
 ];
 
-let statusEffectList = [
+const statusEffectList = [
   "poisoned",
   "paralyzed",
   "blind",
@@ -383,7 +383,7 @@ let statusEffectList = [
   "very very lucky",
 ];
 
-let statusInstantList = [
+const statusInstantList = [
   "poisoned",
   "tied up",
   "asleep",
@@ -398,7 +398,7 @@ let statusInstantList = [
   "homesick",
 ];
 
-let transformList = [
+const transformList = [
   "a dog",
   "a horse",
   "a skeleton",
@@ -451,9 +451,9 @@ let transformList = [
   "a leper",
 ];
 
-let sensoriumList = ["illusion", "see", "hear", "smell", "taste", "feel"];
+const sensoriumList = ["illusion", "see", "hear", "smell", "taste", "feel"];
 
-let illusionList = [
+const illusionList = [
   "bleed from empty eyesockets",
   "be surrounded by angry bees",
   "have horrifying deformities",
@@ -477,7 +477,7 @@ let illusionList = [
   "be glowing brightly",
 ];
 
-let seeList = [
+const seeList = [
   "something dark out of the corner of possesiveTarget eye",
   "a vision of possesiveTarget gruesome death",
   "a dull red glow",
@@ -490,7 +490,7 @@ let seeList = [
   "the sprits of the dead",
 ];
 
-let hearList = [
+const hearList = [
   "tinkling bells",
   "something skittering away behind themTargetself",
   "a loud whooping noise",
@@ -510,7 +510,7 @@ let hearList = [
   "a low snickering",
 ];
 
-let smellList = [
+const smellList = [
   "rotting flesh",
   "a strong scent of lavender",
   "fear",
@@ -531,7 +531,7 @@ let smellList = [
   "motor oil",
 ];
 
-let tasteList = [
+const tasteList = [
   "sausage",
   "blood",
   "rotten fruit",
@@ -555,7 +555,7 @@ let tasteList = [
   "soap",
 ];
 
-let feelList = [
+const feelList = [
   "the touch of spectral hands",
   "like justTarget can't breathe",
   "a crawling sensation like a bug on possesiveTarget skin",
@@ -568,7 +568,7 @@ let feelList = [
   "possesiveTarget skin bubbling",
 ];
 
-let summonList = [
+const summonList = [
   "spectral weapon",
   "perfect meatball sub",
   "pond full of carp",
@@ -583,13 +583,13 @@ let summonList = [
   "rubber chicken",
 ];
 
-let summonSingleList = [
+const summonSingleList = [
   "pond full of carp",
   "hearty sandwich",
   "flying machine",
 ];
 
-let summonCreatureList = [
+const summonCreatureList = [
   "dragon",
   "earth elemental",
   "air elemental",
@@ -597,14 +597,14 @@ let summonCreatureList = [
   "fire elemental",
 ];
 
-let summonPrefixList = ["demonic", "dire", "celestial", "giant", "albino"];
+const summonPrefixList = ["demonic", "dire", "celestial", "giant", "albino"];
 
-let summonSuffixList = [
+const summonSuffixList = [
   "appears out of thin air to serve you",
   "appears, and immediately attacks",
 ];
 
-let miscList = [
+const miscList = [
   "thinkSHere justTarget are a",
   "attacked by",
   "all corpses within a 3-meter radius come back to life",
@@ -643,9 +643,9 @@ let miscList = [
   "everything within a 3-meter radius is suddenly clean and tidy",
 ];
 
-let undeadList = ["good as new", "zombies", "skeletons", "vampires", "liches"];
+const undeadList = ["good as new", "zombies", "skeletons", "vampires", "liches"];
 
-let attractList = [
+const attractList = [
   "animals",
   "monsters",
   "people justTarget findSHere attractive",
@@ -653,7 +653,7 @@ let attractList = [
   "bees",
 ];
 
-let attackList = ["dirty laundry", "orcs", "angry bees"];
+const attackList = ["dirty laundry", "orcs", "angry bees"];
 
-let thinkAreList = ["teapot", "king"];
+const thinkAreList = ["teapot", "king"];
 

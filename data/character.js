@@ -1,6 +1,6 @@
 // Character Data Arrays
 
-let ages = [
+const ages = [
   "small child",
   "child",
   "teenager",
@@ -19,7 +19,7 @@ let ages = [
   "ancient",
 ];
 
-let sexes = [
+const sexes = [
   "male",
   "male",
   "male",
@@ -44,8 +44,8 @@ let sexes = [
 ];
 
 // Name generator data
-let numS = [1, 1, 1, 1, 2, 2, 2, 3, 3];
-let vowels = [
+const numS = [1, 1, 1, 1, 2, 2, 2, 3, 3];
+const vowels = [
   "a",
   "e",
   "i",
@@ -99,7 +99,7 @@ let vowels = [
   "ua",
   "ui",
 ];
-let consonants = [
+const consonants = [
   "b",
   "c",
   "d",
@@ -142,7 +142,7 @@ let consonants = [
   "vl",
   "wr",
 ];
-let finals = [
+const finals = [
   "b",
   "d",
   "f",
@@ -166,7 +166,7 @@ let finals = [
   "th",
 ];
 
-let roles = [
+const roles = [
   "administrator",
   "adventurer",
   "advisor",
@@ -300,7 +300,7 @@ let roles = [
   "zealot",
 ];
 
-let motVerb = [
+const motVerb = [
   "abduct",
   "abuse",
   "access",
@@ -401,7 +401,7 @@ let motVerb = [
   "work",
 ];
 
-let motNoun = [
+const motNoun = [
   "academia",
   "advice",
   "affluence",
@@ -505,7 +505,7 @@ let motNoun = [
   "zeal",
 ];
 
-let quirks = [
+const quirks = [
   "believe the end is near",
   "know a secret",
   "can juggle",
@@ -683,7 +683,7 @@ let quirks = [
   "never follow the rules",
 ];
 
-let fof = [
+const fof = [
   "worships",
   "loves",
   "likes",

@@ -1,6 +1,6 @@
 // Utility Data Arrays
 
-let characteristics = [
+const characteristics = [
   "abrasive",
   "absent-minded",
   "adaptable",
@@ -333,7 +333,7 @@ let characteristics = [
   "witty",
 ];
 
-let animalList = [
+const animalList = [
   "albatross",
   "alligator",
   "alpaca",
