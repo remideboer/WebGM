@@ -21,21 +21,23 @@ function print(str) {
     item.isOld = true;
   });
   
-  // Voeg nieuw item toe aan begin van array
+  // Voeg nieuw item toe aan begin van array (nieuwste eerst voor copy functionaliteit)
   displayItems.unshift(newItem);
   
   // Render alle items
   renderDisplay();
   
-  // Scroll naar boven voor nieuwe content
+  // Scroll naar beneden voor nieuwe content
   let display = document.getElementById("display");
-  display.scrollTop = 0;
+  display.scrollTop = display.scrollHeight;
 }
 
 function renderDisplay() {
   let display = document.getElementById("display");
   display.innerHTML = "";
 
+  // Render array in normale volgorde (nieuwste eerst)
+  // CSS flex-direction: column-reverse zorgt ervoor dat items onderaan worden gepositioneerd
   displayItems.forEach((item, index) => {
     let card = document.createElement("div");
     card.className = "display-card " + (item.isOld ? "old" : "new");
