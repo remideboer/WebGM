@@ -1,14 +1,14 @@
 // CreatureGenerator - Creature generation functionality
 const CreatureGenerator = {
   generate() {
-    let nsize = randomPick(size);
-    let nlike = randomPick(like);
-    let nbut = randomPick(but);
-    let nhead = randomPick(head);
-    let nextras = randomPick(extras);
-    let nfight = randomPick(fight);
-    let ncover = randomPick(cover);
-    let ndesign = randomPick(design);
+    const nsize = randomPick(size);
+    const nlike = randomPick(like);
+    const nbut = randomPick(but);
+    const nhead = randomPick(head);
+    const nextras = randomPick(extras);
+    const nfight = randomPick(fight);
+    const ncover = randomPick(cover);
+    const ndesign = randomPick(design);
     let ncolorA = randomPick(color);
     let ncolorB = randomPick(color);
     let text =
@@ -27,7 +27,7 @@ const CreatureGenerator = {
       ". It is " +
       ncover +
       " and is ";
-    let blanket = Math.random();
+    const blanket = Math.random();
     while (ncolorA == ncolorB) {
       ncolorB = randomPick(color);
     }
@@ -59,7 +59,7 @@ const MagicGenerator = {
     // Initialize if needed
     this._initialize();
 
-    let magCat = randomPick(magCatList);
+    const magCat = randomPick(magCatList);
 
     let magic = "";
     let append = "";
@@ -68,9 +68,9 @@ const MagicGenerator = {
     let pluralSwitch = false;
 
     let duration = randomPick(durationList);
-    let directTarget = randomPick(directTargetList);
-    let areaTarget = randomPick(areaTargetList);
-    let genTarget = randomPick(genTargetList);
+    const directTarget = randomPick(directTargetList);
+    const areaTarget = randomPick(areaTargetList);
+    const genTarget = randomPick(genTargetList);
     let directTargetType = false;
     if (directTarget == "you") {
       directTargetType = true;
@@ -120,7 +120,7 @@ const MagicGenerator = {
         targetType = "direct";
         magic += directTarget + " gainSHere the ability to ";
         if (inside(effect, abilityAbsoluteList) == false) {
-          let notWell = Math.random();
+          const notWell = Math.random();
           if (notWell <= 0.3) {
             append = ", but not very well, ";
           } else {
@@ -139,7 +139,7 @@ const MagicGenerator = {
         effect = randomPick(controlList);
         targetType = "direct";
         magic += directTarget + " can now control ";
-        let notWell = Math.random();
+        const notWell = Math.random();
         if (notWell <= 0.3) {
           append = ", but not very well, ";
         } else {
@@ -372,11 +372,12 @@ const MagicGenerator = {
 };
 
 // Initialize wildDurations and extended lists after animalList is loaded
-let wildDurations = goodWildDurations.concat(badWildDurations);
-summonList = summonList.concat(animalList);
-summonCreatureList = summonCreatureList.concat(animalList);
-attractList = attractList.concat(animalList);
-thinkAreList = thinkAreList.concat(animalList);
+const wildDurations = goodWildDurations.concat(badWildDurations);
+// Mutate arrays instead of reassigning (since they are const)
+summonList.push(...animalList);
+summonCreatureList.push(...animalList);
+attractList.push(...animalList);
+thinkAreList.push(...animalList);
 
 // Legacy function wrappers for backward compatibility with HTML onclick handlers
 function creature() {

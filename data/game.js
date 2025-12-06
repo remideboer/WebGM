@@ -1,39 +1,7 @@
 // Game Mechanics Data Arrays
+// Note: mythicTable and oddsLabels have been migrated to features/mythic/data.js
 
-const mythicTable = [
-  // Certain (0)
-  [[10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null], [20, 99, null], [20, 99, null]],
-  // Nearly Certain (1)
-  [[7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null], [20, 99, null]],
-  // Very Likely (2)
-  [[5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100], [20, 99, null]],
-  // Likely (3)
-  [[3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99], [19, 95, 100]],
-  // 50/50 (4)
-  [[2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98], [18, 90, 99]],
-  // Unlikely (5)
-  [[1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96], [17, 85, 98]],
-  // Very Unlikely (6)
-  [[null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94], [15, 75, 96]],
-  // Nearly Impossible (7)
-  [[null, 1, 81], [null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91], [13, 65, 94]],
-  // Impossible (8)
-  [[null, 1, 81], [null, 1, 81], [null, 1, 81], [1, 5, 82], [2, 10, 83], [3, 15, 84], [5, 25, 86], [7, 35, 88], [10, 50, 91]]
-];
-
-const oddsLabels = [
-  "Certain",
-  "Nearly Certain",
-  "Very Likely",
-  "Likely",
-  "50/50",
-  "Unlikely",
-  "Very Unlikely",
-  "Nearly Impossible",
-  "Impossible"
-];
-
-let pokerValues = [
+const pokerValues = [
   "ace",
   "two",
   "three",
@@ -49,10 +17,10 @@ let pokerValues = [
   "king",
 ];
 
-let pokerSuites = ["spades", "diamonds", "clubs", "hearts"];
-let pokerJokers = ["red joker", "black joker"];
+const pokerSuites = ["spades", "diamonds", "clubs", "hearts"];
+const pokerJokers = ["red joker", "black joker"];
 
-let majorArcana = [
+const majorArcana = [
   "the fool",
   "the magician",
   "the high priestess",
@@ -77,7 +45,7 @@ let majorArcana = [
   "the world",
 ];
 
-let minorValues = [
+const minorValues = [
   "ace",
   "two",
   "three",
@@ -94,10 +62,10 @@ let minorValues = [
   "king",
 ];
 
-let minorSuites = ["wands", "cups", "swords", "pentacles"];
+const minorSuites = ["wands", "cups", "swords", "pentacles"];
 
-let prefix = "glyphs/";
-let glyphs = [
+const prefix = "glyphs/";
+const glyphs = [
   "acid",
   "ages",
   "alien-bug",
@@ -319,7 +287,7 @@ let glyphs = [
   "yin-yang",
 ];
 
-let severity = [
+const severity = [
   "life-threatening",
   "life-threatening",
   "critical",
@@ -345,5 +313,5 @@ let severity = [
   "negligible",
 ];
 
-let area = ["head", "torso", "left arm", "right arm", "left leg", "right leg"];
+const area = ["head", "torso", "left arm", "right arm", "left leg", "right leg"];
 
