@@ -1,17 +1,47 @@
 // General Functions
 
+// Data storage voor display items
+let displayItems = [];
+
 function randomPick(array) {
   let randomNumber = Math.floor(Math.random() * array.length);
   return array[randomNumber];
 }
 
 function print(str) {
-  if (document.getElementById("display").value == "") {
-    document.getElementById("display").value = str;
-  } else {
-    document.getElementById("display").value =
-      str + " \n" + document.getElementById("display").value;
-  }
+  // Voeg nieuw item toe aan data structuur
+  let newItem = {
+    type: "text",
+    text: str,
+    timestamp: Date.now()
+  };
+  
+  // Markeer alle bestaande items als 'old'
+  displayItems.forEach(item => {
+    item.isOld = true;
+  });
+  
+  // Voeg nieuw item toe aan begin van array
+  displayItems.unshift(newItem);
+  
+  // Render alle items
+  renderDisplay();
+  
+  // Scroll naar boven voor nieuwe content
+  let display = document.getElementById("display");
+  display.scrollTop = 0;
+}
+
+function renderDisplay() {
+  let display = document.getElementById("display");
+  display.innerHTML = "";
+  
+  displayItems.forEach((item, index) => {
+    let card = document.createElement("div");
+    card.className = "display-card " + (item.isOld ? "old" : "new");
+    card.textContent = item.text;
+    display.appendChild(card);
+  });
 }
 
 function inside(needle, haystack) {

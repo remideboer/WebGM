@@ -3,6 +3,17 @@
 <head>
 	<title>WebGM</title>
 	<style>
+		/* Color Scheme - Modulair aanpasbaar */
+		:root {
+			--card-bg-new: #d4edda; /* Light green */
+			--card-border-new: #007bff; /* Blue */
+			--card-text-new: #721c24; /* Dark red */
+			--card-bg-old: #d4edda; /* Light green */
+			--card-border-old: #8b4513; /* Brown */
+			--card-text-old: #dc3545; /* Light red, faded */
+			--card-opacity-old: 0.6; /* Fade effect */
+		}
+
 		img#canvasA, img#canvasB, img#canvasC {
 			width: 100px;
 			height: 100px;
@@ -19,6 +30,37 @@
 			display: inline-block;
 			vertical-align: top;
 		}
+
+		#display {
+			width: 100%;
+			height: 300px;
+			border: 1px solid #ccc;
+			padding: 10px;
+			overflow-y: auto;
+			background-color: #fff;
+			font-family: Arial, sans-serif;
+		}
+
+		.display-card {
+			margin-bottom: 10px;
+			padding: 12px;
+			border-radius: 8px;
+			word-wrap: break-word;
+			transition: opacity 0.3s ease;
+		}
+
+		.display-card.new {
+			background-color: var(--card-bg-new);
+			border: 2px solid var(--card-border-new);
+			color: var(--card-text-new);
+		}
+
+		.display-card.old {
+			background-color: var(--card-bg-old);
+			border: 1px solid var(--card-border-old);
+			color: var(--card-text-old);
+			opacity: var(--card-opacity-old);
+		}
 	</style>
 	<script src="js-utility.js"></script>
 	<script src="js-game.js"></script>
@@ -29,7 +71,7 @@
 
 <body>
 	<!--GameStuff-->
-	<textarea id="display" rows= 10 cols=50></textarea>
+	<div id="display"></div>
 	<img id="canvasA" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 	<img id="canvasB" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 	<img id="canvasC" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">

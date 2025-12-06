@@ -1,17 +1,41 @@
-//Copy text to Clipboard - this function is basically copied from w3schools.com
+//Copy text to Clipboard
 
 function toClipboard() {
-  /* Get the text field */
-  let copyText = document.getElementById("display");
+  // Verzamel alle tekst uit de data structuur (nieuwste eerst)
+  let textToCopy = displayItems
+    .map(item => item.text)
+    .join("\n");
+  
+  // Gebruik moderne Clipboard API
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      alert("Copied all notes");
+    }).catch(err => {
+      console.error("Failed to copy: ", err);
+      // Fallback naar oude methode
+      fallbackCopyText(textToCopy);
+    });
+  } else {
+    // Fallback voor oudere browsers
+    fallbackCopyText(textToCopy);
+  }
+}
 
-  /* Select the text field */
-  copyText.select();
-
-  /* Copy the text inside the text field */
-  document.execCommand("Copy");
-
-  /* Alert the copied text */
-  alert("Copied all notes");
+function fallbackCopyText(text) {
+  let textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand("copy");
+    alert("Copied all notes");
+  } catch (err) {
+    console.error("Fallback copy failed: ", err);
+  }
+  document.body.removeChild(textArea);
 }
 
 // Y/N
