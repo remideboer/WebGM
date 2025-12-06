@@ -25,47 +25,102 @@
 	
 	<!--Controle elementen groep-->
 	<div class="group controls-group">
-		<button onclick="toClipboard()">Copy text</button>
-		<br>
-		<button onclick="yesno()">Yes/No</button>
-		<input type="range" id="ynSlider" min="1" max="19" value="10" onchange="ynShowValue(this.value)">
-		<span id="chance">50% yes</span>
-		<button onclick="poker()">Poker Card</button>
-		<button onclick="tarot()">Tarot Card</button>
-		<button onclick="displayImage()">Glyph</button>
-		<br>
-		<button onclick="customDice()">Roll Dice</button>
-		number of dice:<input type="text" id="numDice" value="1" size="5">
-		number of sides:<input type="text" id="diceSides" value="20" size="5">
-		<button onclick="fudgefate()">Fate/Fudge</button>
-		<br>
-		<button onclick="damage()">Damage</button>
-		<input type="range" id="damageSlider" min="0" max="10" value="1" onchange="damageShowValue(this.value)">
-		<span id="danger">danger level 1</span>
-		<br>
-		 <!--General Generators:-->
-		<button onclick="genre()">Genre(s)</button>
-		<button onclick="eventGen()">Event</button>
-		<button onclick="setting()">Setting</button>
-		<button onclick="genItem()">Item</button>
-		<button onclick="quest()">Quest</button>
-		<button id="colorButton", onclick="colorGet()";">Color</button>
-		<button onclick="animal()">Animal</button>
-		<button onclick="sense()">Sense Snippet</button>
-		<br>
-		<!--Chatacters-->
-		 <button onclick="nameGen()">Name</button>
-		 <button onclick="character()">Character</button>
-		 <button onclick="characteristic()">Characteristic</button>
-		<button onclick="getRole()">Role</button>
-		<button onclick="motivation()">Motivation</button>
-		<button onclick="quirk()">Quirk</button>
-		<button onclick="friend()">Friendliness</button>
-		<br>
-
-		<!--Additional-->
-		<button onclick="creature()">Creature</button>
-		<button onclick="magicFX()">Magical Effects</button>
+		<!--Decision & Card Generation-->
+		<div class="control-subgroup">
+			<h3 class="subgroup-header">Decision & Card Generation</h3>
+			<div class="subgroup-content">
+				<button onclick="toClipboard()">Copy text</button>
+				<div class="control-row">
+					<button onclick="yesno()">Yes/No</button>
+					<input type="range" id="ynSlider" min="1" max="19" value="10" onchange="ynShowValue(this.value)">
+					<span id="chance">50% yes</span>
+				</div>
+				<div class="button-row">
+					<button onclick="poker()">Poker Card</button>
+					<button onclick="tarot()">Tarot Card</button>
+					<button onclick="displayImage()">Glyph</button>
+				</div>
+			</div>
+		</div>
+		
+		<!--Dice Rolling-->
+		<div class="control-subgroup">
+			<h3 class="subgroup-header">Dice Rolling</h3>
+			<div class="subgroup-content">
+				<div class="control-row">
+					<button onclick="customDice()">Roll Dice</button>
+					<label>number of dice:<input type="text" id="numDice" value="1" size="5"></label>
+					<label>number of sides:<input type="text" id="diceSides" value="20" size="5"></label>
+				</div>
+				<div class="button-row">
+					<button onclick="fudgefate()">Fate/Fudge</button>
+				</div>
+			</div>
+		</div>
+		
+		<!--Damage/Danger Level-->
+		<div class="control-subgroup">
+			<h3 class="subgroup-header">Damage/Danger Level</h3>
+			<div class="subgroup-content">
+				<div class="control-row">
+					<button onclick="damage()">Damage</button>
+					<input type="range" id="damageSlider" min="0" max="10" value="1" onchange="damageShowValue(this.value)">
+					<span id="danger">danger level 1</span>
+				</div>
+			</div>
+		</div>
+		
+		<!--World/Scenario Elements-->
+		<div class="control-subgroup">
+			<h3 class="subgroup-header">World/Scenario Elements</h3>
+			<div class="subgroup-content">
+				<div class="button-row">
+					<button onclick="genre()">Genre(s)</button>
+					<button onclick="eventGen()">Event</button>
+					<button onclick="setting()">Setting</button>
+				</div>
+				<div class="button-row">
+					<button onclick="genItem()">Item</button>
+					<button onclick="quest()">Quest</button>
+					<button id="colorButton", onclick="colorGet()";">Color</button>
+				</div>
+				<div class="button-row">
+					<button onclick="animal()">Animal</button>
+					<button onclick="sense()">Sense Snippet</button>
+				</div>
+			</div>
+		</div>
+		
+		<!--Character Elements-->
+		<div class="control-subgroup">
+			<h3 class="subgroup-header">Character Elements</h3>
+			<div class="subgroup-content">
+				<div class="button-row">
+					<button onclick="nameGen()">Name</button>
+					<button onclick="character()">Character</button>
+					<button onclick="characteristic()">Characteristic</button>
+				</div>
+				<div class="button-row">
+					<button onclick="getRole()">Role</button>
+					<button onclick="motivation()">Motivation</button>
+					<button onclick="quirk()">Quirk</button>
+				</div>
+				<div class="button-row">
+					<button onclick="friend()">Friendliness</button>
+				</div>
+			</div>
+		</div>
+		
+		<!--Creature & Magical Elements-->
+		<div class="control-subgroup">
+			<h3 class="subgroup-header">Creature & Magical Elements</h3>
+			<div class="subgroup-content">
+				<div class="button-row">
+					<button onclick="creature()">Creature</button>
+					<button onclick="magicFX()">Magical Effects</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<!--Credits-->
