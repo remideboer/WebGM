@@ -23,6 +23,31 @@
 	--message-text-error: #721c24; /* Dark red */
 }
 
+/* Group centering */
+.group {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 10px 0;
+}
+
+.display-group {
+	margin-top: 20px;
+}
+
+.glyph-group {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.controls-group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
 img#canvasA, img#canvasB, img#canvasC {
 	width: 100px;
 	height: 100px;
@@ -41,7 +66,8 @@ img#canvasA, img#canvasB, img#canvasC {
 }
 
 #display {
-	width: 100%;
+	width: 90%;
+	max-width: 800px;
 	height: 300px;
 	border: 1px solid #ccc;
 	padding: 10px;
