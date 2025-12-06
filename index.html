@@ -2,6 +2,24 @@
 <html>
 <head>
 	<title>WebGM</title>
+	<style>
+		img#canvasA, img#canvasB, img#canvasC {
+			width: 100px;
+			height: 100px;
+			background-color: transparent;
+			border: 0 !important;
+			border-top: 0 !important;
+			border-right: 0 !important;
+			border-bottom: 0 !important;
+			border-left: 0 !important;
+			border-color: transparent !important;
+			border-width: 0 !important;
+			border-style: none !important;
+			outline: none !important;
+			display: inline-block;
+			vertical-align: top;
+		}
+	</style>
 	<script src="js-utility.js"></script>
 	<script src="js-game.js"></script>
 	<script src="js-general.js"></script>
@@ -12,9 +30,9 @@
 <body>
 	<!--GameStuff-->
 	<textarea id="display" rows= 10 cols=50></textarea>
-	<img src="blank.jpg" id="canvasA" style="width:100px">
-	<img src="blank.jpg" id="canvasB" style="width:100px">
-	<img src="blank.jpg" id="canvasC" style="width:100px">
+	<img id="canvasA" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+	<img id="canvasB" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+	<img id="canvasC" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 	<br>
 	<button onclick="toClipboard()">Copy text</button>
 	<br>
