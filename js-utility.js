@@ -719,3 +719,82 @@ let animalList = [
   "worm",
   "zebra",
 ];
+
+// Control subgroup toggle functionality
+function toggleSubgroup(subgroupId) {
+  const subgroup = document.querySelector(`[data-subgroup="${subgroupId}"]`);
+  if (!subgroup) return;
+  
+  const isCollapsed = subgroup.classList.contains("collapsed");
+  const toggleButton = subgroup.querySelector(".toggle-button");
+  
+  if (isCollapsed) {
+    // Expand: remove collapsed class, show "-"
+    subgroup.classList.remove("collapsed");
+    toggleButton.textContent = "-";
+  } else {
+    // Collapse: add collapsed class, show "+"
+    subgroup.classList.add("collapsed");
+    toggleButton.textContent = "+";
+  }
+  
+  // Update layout after toggle
+  updateControlsLayout();
+}
+
+function updateControlsLayout() {
+  const controlsGroup = document.querySelector(".controls-group");
+  if (!controlsGroup) return;
+  
+  const subgroups = Array.from(controlsGroup.querySelectorAll(".control-subgroup"));
+  
+  // Remove all layout classes first
+  subgroups.forEach(card => {
+    card.classList.remove("expanded-solo", "collapsed-below");
+    card.style.gridColumn = "";
+    card.style.gridRow = "";
+    card.style.justifySelf = "";
+    card.style.maxWidth = "";
+  });
+  
+  // Group subgroups by row (2 per row in grid)
+  const rows = [];
+  for (let i = 0; i < subgroups.length; i += 2) {
+    rows.push(subgroups.slice(i, i + 2));
+  }
+  
+  // Process each row
+  rows.forEach((row, rowIndex) => {
+    const expanded = row.filter(card => !card.classList.contains("collapsed"));
+    const collapsed = row.filter(card => card.classList.contains("collapsed"));
+    
+    if (expanded.length === 2) {
+      // Both expanded: normal grid layout (no changes needed)
+      // Cards stay in their normal grid positions
+    } else if (expanded.length === 1 && collapsed.length === 1) {
+      // One expanded, one collapsed: expanded centered, collapsed below
+      const expandedCard = expanded[0];
+      const collapsedCard = collapsed[0];
+      
+      // Expanded card: full width, centered, on first row
+      expandedCard.style.gridColumn = "1 / -1";
+      expandedCard.style.gridRow = rowIndex * 2 + 1;
+      expandedCard.style.justifySelf = "center";
+      expandedCard.style.maxWidth = "50%";
+      
+      // Collapsed card: full width, centered, on second row
+      collapsedCard.style.gridColumn = "1 / -1";
+      collapsedCard.style.gridRow = rowIndex * 2 + 2;
+      collapsedCard.style.justifySelf = "center";
+      collapsedCard.style.maxWidth = "50%";
+    } else if (collapsed.length === 2) {
+      // Both collapsed: side by side (normal grid layout)
+      // Cards stay in their normal grid positions
+    }
+  });
+}
+
+// Initialize layout on page load
+document.addEventListener("DOMContentLoaded", function() {
+  updateControlsLayout();
+});

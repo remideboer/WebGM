@@ -19,8 +19,11 @@
 	<!--Controle elementen groep-->
 	<div class="group controls-group">
 		<!--Decision & Card Generation-->
-		<div class="control-subgroup">
-			<h3 class="subgroup-header">Decision & Card Generation</h3>
+		<div class="control-subgroup" data-subgroup="decision">
+			<h3 class="subgroup-header">
+				<span class="subgroup-title">Decision & Card Generation</span>
+				<button class="toggle-button" onclick="toggleSubgroup('decision')" aria-label="Toggle subgroup">-</button>
+			</h3>
 			<div class="subgroup-content">
 				<button onclick="toClipboard()">Copy text</button>
 				<div class="control-row">
@@ -54,8 +57,11 @@
 		</div>
 		
 		<!--Dice Rolling-->
-		<div class="control-subgroup">
-			<h3 class="subgroup-header">Dice Rolling</h3>
+		<div class="control-subgroup" data-subgroup="dice">
+			<h3 class="subgroup-header">
+				<span class="subgroup-title">Dice Rolling</span>
+				<button class="toggle-button" onclick="toggleSubgroup('dice')" aria-label="Toggle subgroup">-</button>
+			</h3>
 			<div class="subgroup-content">
 				<div class="control-row">
 					<button onclick="customDice()">Roll Dice</button>
@@ -69,8 +75,11 @@
 		</div>
 		
 		<!--Damage/Danger Level-->
-		<div class="control-subgroup">
-			<h3 class="subgroup-header">Damage/Danger Level</h3>
+		<div class="control-subgroup" data-subgroup="damage">
+			<h3 class="subgroup-header">
+				<span class="subgroup-title">Damage/Danger Level</span>
+				<button class="toggle-button" onclick="toggleSubgroup('damage')" aria-label="Toggle subgroup">-</button>
+			</h3>
 			<div class="subgroup-content">
 				<div class="control-row">
 					<button onclick="damage()">Damage</button>
@@ -81,8 +90,11 @@
 		</div>
 		
 		<!--World/Scenario Elements-->
-		<div class="control-subgroup">
-			<h3 class="subgroup-header">World/Scenario Elements</h3>
+		<div class="control-subgroup" data-subgroup="world">
+			<h3 class="subgroup-header">
+				<span class="subgroup-title">World/Scenario Elements</span>
+				<button class="toggle-button" onclick="toggleSubgroup('world')" aria-label="Toggle subgroup">-</button>
+			</h3>
 			<div class="subgroup-content">
 				<div class="button-row">
 					<button onclick="genre()">Genre(s)</button>
@@ -102,8 +114,11 @@
 		</div>
 		
 		<!--Character Elements-->
-		<div class="control-subgroup">
-			<h3 class="subgroup-header">Character Elements</h3>
+		<div class="control-subgroup" data-subgroup="character">
+			<h3 class="subgroup-header">
+				<span class="subgroup-title">Character Elements</span>
+				<button class="toggle-button" onclick="toggleSubgroup('character')" aria-label="Toggle subgroup">-</button>
+			</h3>
 			<div class="subgroup-content">
 				<div class="button-row">
 					<button onclick="nameGen()">Name</button>
@@ -122,8 +137,11 @@
 		</div>
 		
 		<!--Creature & Magical Elements-->
-		<div class="control-subgroup">
-			<h3 class="subgroup-header">Creature & Magical Elements</h3>
+		<div class="control-subgroup" data-subgroup="creature">
+			<h3 class="subgroup-header">
+				<span class="subgroup-title">Creature & Magical Elements</span>
+				<button class="toggle-button" onclick="toggleSubgroup('creature')" aria-label="Toggle subgroup">-</button>
+			</h3>
 			<div class="subgroup-content">
 				<div class="button-row">
 					<button onclick="creature()">Creature</button>
