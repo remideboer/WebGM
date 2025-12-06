@@ -748,7 +748,7 @@ function updateControlsLayout() {
   
   const subgroups = Array.from(controlsGroup.querySelectorAll(".control-subgroup"));
   
-  // Remove all layout classes first
+  // Remove all layout styles first
   subgroups.forEach(card => {
     card.classList.remove("expanded-solo", "collapsed-below");
     card.style.gridColumn = "";
@@ -763,33 +763,50 @@ function updateControlsLayout() {
     rows.push(subgroups.slice(i, i + 2));
   }
   
-  // Process each row
+  // Calculate total rows needed (including extra rows for collapsed items)
+  let currentGridRow = 1;
+  
+  // Process each logical row
   rows.forEach((row, rowIndex) => {
     const expanded = row.filter(card => !card.classList.contains("collapsed"));
     const collapsed = row.filter(card => card.classList.contains("collapsed"));
     
     if (expanded.length === 2) {
-      // Both expanded: normal grid layout (no changes needed)
-      // Cards stay in their normal grid positions
+      // Both expanded: normal grid layout, side by side
+      expanded.forEach((card, index) => {
+        card.style.gridColumn = index + 1;
+        card.style.gridRow = currentGridRow;
+        card.style.justifySelf = "";
+        card.style.maxWidth = "";
+      });
+      currentGridRow++;
     } else if (expanded.length === 1 && collapsed.length === 1) {
-      // One expanded, one collapsed: expanded centered, collapsed below
+      // One expanded, one collapsed: expanded centered on full width, collapsed below in same logical row
       const expandedCard = expanded[0];
       const collapsedCard = collapsed[0];
       
-      // Expanded card: full width, centered, on first row
+      // Expanded card: full width, centered, on current row
       expandedCard.style.gridColumn = "1 / -1";
-      expandedCard.style.gridRow = rowIndex * 2 + 1;
+      expandedCard.style.gridRow = currentGridRow;
       expandedCard.style.justifySelf = "center";
       expandedCard.style.maxWidth = "50%";
+      currentGridRow++;
       
-      // Collapsed card: full width, centered, on second row
+      // Collapsed card: full width, centered, on next row (still part of same logical row)
       collapsedCard.style.gridColumn = "1 / -1";
-      collapsedCard.style.gridRow = rowIndex * 2 + 2;
+      collapsedCard.style.gridRow = currentGridRow;
       collapsedCard.style.justifySelf = "center";
       collapsedCard.style.maxWidth = "50%";
+      currentGridRow++;
     } else if (collapsed.length === 2) {
-      // Both collapsed: side by side (normal grid layout)
-      // Cards stay in their normal grid positions
+      // Both collapsed: side by side, normal grid layout
+      collapsed.forEach((card, index) => {
+        card.style.gridColumn = index + 1;
+        card.style.gridRow = currentGridRow;
+        card.style.justifySelf = "";
+        card.style.maxWidth = "";
+      });
+      currentGridRow++;
     }
   });
 }
