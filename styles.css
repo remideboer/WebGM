@@ -6,7 +6,7 @@
 	--card-bg-old: #d4edda; /* Light green */
 	--card-border-old: #8b4513; /* Brown */
 	--card-text-old: #dc3545; /* Light red, faded */
-	--card-opacity-old: 0.6; /* Fade effect */
+	--card-opacity-old: #0.6; /* Fade effect */
 	
 	/* Message notification colors */
 	--message-bg-success: #d4edda; /* Light green */
@@ -21,6 +21,16 @@
 	--message-bg-error: #f8d7da; /* Light red */
 	--message-border-error: #dc3545; /* Red */
 	--message-text-error: #721c24; /* Dark red */
+	
+	/* Layout variabelen - Modulair aanpasbaar */
+	--display-width: 90%;
+	--display-max-width: 800px;
+	--controls-width: 90%;
+	--controls-max-width: 800px;
+	--subgroups-per-row: 2; /* Aantal subgroepen per regel */
+	--subgroup-gap: 25px; /* Ruimte tussen subgroepen */
+	--subgroup-padding-horizontal: 8px; /* Horizontale padding in subgroepen */
+	--subgroup-padding-vertical: 15px; /* Verticale padding in subgroepen */
 }
 
 /* Group centering */
@@ -33,27 +43,30 @@
 
 .display-group {
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .glyph-group {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
+	margin-bottom: 20px;
 }
 
 .controls-group {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--subgroup-gap);
+	align-items: start;
 	text-align: center;
-	width: 100%;
-	max-width: 900px;
+	width: var(--controls-width);
+	max-width: var(--controls-max-width);
+	margin: 0 auto;
 }
 
 .control-subgroup {
 	width: 100%;
-	margin: 20px 0;
-	padding: 15px;
+	padding: var(--subgroup-padding-vertical) var(--subgroup-padding-horizontal);
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	background-color: #f9f9f9;
@@ -122,8 +135,8 @@ img#canvasA, img#canvasB, img#canvasC {
 }
 
 #display {
-	width: 90%;
-	max-width: 800px;
+	width: var(--display-width);
+	max-width: var(--display-max-width);
 	height: 300px;
 	border: 1px solid #ccc;
 	padding: 10px;
