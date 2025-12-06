@@ -130,16 +130,16 @@ function calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, excepti
     // Special case: x **1** threshold (Impossible/Very Unlikely with low CF)
     // Yes target = 1, so roll 1 = Yes, roll 2-100 = No
     if (roll <= yesTarget) {
-      // Roll 1 = Exceptional Yes (YES AND) - this is the only Yes result
-      result = "YES AND";
+      // Roll 1 = Exceptional Yes (Yes, and...) - this is the only Yes result
+      result = "Yes, and...";
       resultType = "yes-and";
     } else {
       // Roll 2-100 = No
       if (exceptionalNoThreshold !== null && roll > exceptionalNoThreshold) {
-        result = "NO AND";
+        result = "No, and...";
         resultType = "no-and";
       } else {
-        result = "NO";
+        result = "No";
         resultType = "no";
       }
     }
@@ -149,15 +149,15 @@ function calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, excepti
     if (roll <= yesTarget) {
       // Roll 1-99 = Yes
       if (roll <= exceptionalYesThreshold) {
-        result = "YES AND";
+        result = "Yes, and...";
         resultType = "yes-and";
       } else {
-        result = "YES";
+        result = "Yes";
         resultType = "yes";
       }
     } else {
-      // Roll 100 = Exceptional No (NO AND)
-      result = "NO AND";
+      // Roll 100 = Exceptional No (No, and...)
+      result = "No, and...";
       resultType = "no-and";
     }
   } else {
@@ -166,19 +166,19 @@ function calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, excepti
     if (roll <= yesTarget) {
       // Yes range: 1 to yesTarget
       if (roll <= exceptionalYesThreshold) {
-        result = "YES AND";
+        result = "Yes, and...";
         resultType = "yes-and";
       } else {
-        result = "YES";
+        result = "Yes";
         resultType = "yes";
       }
     } else {
       // No range: (yesTarget + 1) to 100
       if (roll > exceptionalNoThreshold) {
-        result = "NO AND";
+        result = "No, and...";
         resultType = "no-and";
       } else {
-        result = "NO";
+        result = "No";
         resultType = "no";
       }
     }
@@ -225,10 +225,28 @@ function mythicDecision() {
   const roll = Math.floor(Math.random() * 100) + 1;
   
   // Calculate result using pure function
-  const { result } = calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, exceptionalNoThreshold);
+  const { result, resultType } = calculateMythicResult(roll, exceptionalYesThreshold, yesTarget, exceptionalNoThreshold);
   
-  // Display only the result
-  print(result);
+  // Determine background color based on result type
+  let backgroundColor = null;
+  let textColor = "#FFFFFF"; // White text for colored backgrounds
+  
+  if (resultType === "yes") {
+    backgroundColor = "#4CAF50"; // Green for Yes
+  } else if (resultType === "yes-and") {
+    backgroundColor = "#2E7D32"; // Darker, more saturated green for Yes, and...
+  } else if (resultType === "no") {
+    backgroundColor = "#FFB74D"; // Warning color for No
+  } else if (resultType === "no-and") {
+    backgroundColor = "#E57373"; // Error color for No, and...
+  }
+  
+  // Display result with appropriate colors
+  print(result, {
+    type: "mythic",
+    backgroundColor: backgroundColor,
+    textColor: textColor
+  });
 }
 
 function chaosShowValue(newValue) {

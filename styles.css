@@ -17,6 +17,13 @@
 	--card-text-old: #1F3A3D; /* Donker teal-grijs, faded */
 	--card-opacity-old: 0.6; /* Fade effect */
 	
+	/* Mythic decision result colors */
+	--mythic-yes-bg: #4CAF50; /* Groen voor Yes */
+	--mythic-yes-and-bg: #2E7D32; /* Donkerder, meer verzadigd groen voor Yes, and... */
+	--mythic-no-bg: #FFB74D; /* Warning kleur voor No */
+	--mythic-no-and-bg: #E57373; /* Error kleur voor No, and... */
+	--mythic-text-color: #FFFFFF; /* Witte tekst voor gekleurde achtergronden */
+	
 	/* Message notification colors - aangepast naar nieuw schema */
 	--message-bg-success: #FFFFFF; /* Witte background */
 	--message-border-success: #2A7A7F; /* Primaire accent */

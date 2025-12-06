@@ -175,6 +175,15 @@ function renderDisplay() {
       // Capitalize sentences en maak tekst dikgedrukt
       textSpan.textContent = capitalizeSentences(item.text);
       textSpan.style.fontWeight = "bold";
+      
+      // Apply background and text colors if provided (for mythic decisions, etc.)
+      if (item.backgroundColor) {
+        card.style.backgroundColor = item.backgroundColor;
+      }
+      if (item.textColor) {
+        textSpan.style.color = item.textColor;
+      }
+      
       card.appendChild(textSpan);
     }
     
